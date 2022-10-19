@@ -1,10 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
+import image from "../src//Images//majak-mazak.gif"
 
 function App() {
   return (
     <div>
-     <h1 className='text-6xl  flex mt-52 justify-center'>Hello From Earth</h1>
+     <img className='w-full' src={image} alt="" />
     </div>
   );
 }
