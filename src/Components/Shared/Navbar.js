@@ -41,7 +41,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     to="/"
-                    class="block  h-12 leading-[3rem] border-b-4 border-transparent hover:text-primary hover:border-current text-[12px] "
+                    class="block  h-12 leading-[3rem] border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current text-[12px] "
                   >
                     Home
                   </Link>
@@ -54,7 +54,7 @@ const Navbar = () => {
                     </button>
                   ) : (
                     <Link
-                      className="block h-12 font-bold leading-[3rem] text-[13px] border-b-4 border-transparent hover:text-primary hover:border-current "
+                      className="block h-12 font-bold leading-[3rem] text-[13px] border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current "
                       to="/login"
                     >
                       Login
@@ -70,7 +70,7 @@ const Navbar = () => {
             <>
               <Link
                 to="/"
-                class="font-bold block h-12 leading-[3rem] border-b-4 border-transparent hover:text-primary  ease-in-out duration-200 hover:border-current text-[14px] "
+                class="font-bold block h-12 leading-[3rem] border-b-4 border-transparent hover:text-amber-900 ease-in-out duration-200 hover:border-current text-[14px] "
               >
                 Home
               </Link>
@@ -79,7 +79,7 @@ const Navbar = () => {
                 <>
                   <button
                     onClick={handleSignOut}
-                    className="block h-12 leading-[3rem] font-bold border-b-4 border-transparent hover:text-primary hover:border-current text-[14px] "
+                    className="block h-12 leading-[3rem] font-bold border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current text-[14px] "
                   >
                     Logout
                   </button>
