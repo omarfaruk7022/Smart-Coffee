@@ -1,10 +1,13 @@
 import React from "react";
-import image from "../Images//majak-mazak.gif";
+import Gallery from "./Pages/Gallery";
+
+import Banner from "./Shared/Banner";
 
 const Home = () => {
   return (
     <div>
-      <img className="w-full" src={image} alt="" />
+      <Banner/>
+      <Gallery/>
     </div>
   );
 };
