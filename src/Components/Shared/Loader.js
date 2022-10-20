@@ -5,7 +5,7 @@ const Loader = () => {
   return (
     <div>
       <div className="flex justify-center items-center min-h-screen bg-white">
-        <InfinitySpin width="200" color="#4fa94d" />
+        <InfinitySpin width="200" color="#78350F" />
       </div>
     </div>
   );
