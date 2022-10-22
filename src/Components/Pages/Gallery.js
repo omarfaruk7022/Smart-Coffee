@@ -34,16 +34,21 @@ const Gallery = () => {
               alt="image description"
             />
           </Link>
-          <img
-            class="w-full h-full transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0"
-            src={image3}
-            alt="image description"
-          />
-          <img
-            class="w-full h-full transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0"
-            src={image5}
-            alt="image description"
-          />
+          <Link to="/redeye">
+            <img
+              class="w-full h-full transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0"
+              src={image3}
+              alt="image description"
+            />
+          </Link>
+
+          <Link to="/americano">
+            <img
+              class="w-full h-full transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0"
+              src={image5}
+              alt="image description"
+            />
+          </Link>
           <img
             class="w-full h-full transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0"
             src={image6}

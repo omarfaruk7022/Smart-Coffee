@@ -10,7 +10,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Loader from "./Shared/Loader";
 
-
 const Login = () => {
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
@@ -53,7 +52,12 @@ const Login = () => {
   return (
     <div>
       <div className="grid lg:grid-cols-2 grid-cols-1 ">
-       <img className="lg:block hidden mt-28 ml-28 h-[700px] rounded shadow-lg" src={image} alt="" />
+        
+        <img
+          className="lg:block hidden mt-28 ml-28 h-[700px] rounded shadow-lg"
+          src={image}
+          alt=""
+        />
         <div className="flex justify-center items-center h-screen  ">
           <div className=" hidden lg:block">
             <img alt="" />
