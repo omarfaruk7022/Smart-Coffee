@@ -1,5 +1,6 @@
 import React from "react";
 import Gallery from "./Pages/Gallery";
+import Prices from "./Prices";
 
 import Banner from "./Shared/Banner";
 
@@ -8,6 +9,7 @@ const Home = () => {
     <div >
       <Banner/>
       <Gallery/>
+      <Prices/>
     </div>
   );
 };
