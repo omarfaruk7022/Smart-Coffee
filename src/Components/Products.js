@@ -39,9 +39,15 @@ const Products = () => {
 
                 <p class="text-xs uppercase tracking-wide">6 Colors</p>
               </div>
+              <a
+                class="mt-5 inline-block rounded border  border-current px-8 py-3 text-sm font-medium text-amber-900 transition hover:shadow-2xl focus:outline-none focus:ring active:text-amber-900 w-full text-center"
+                href="/download"
+              >
+                View Details
+              </a>
             </Link>
 
-            <Link to="/productDetail"  class="block">
+            <Link to="/productDetail" class="block">
               <div class="flex justify-center">
                 <strong class="relative h-6 bg-black px-4 text-xs uppercase leading-6 text-white">
                   New
@@ -63,9 +69,15 @@ const Products = () => {
 
                 <p class="text-xs uppercase tracking-wide">6 Colors</p>
               </div>
+              <a
+                class="mt-5 inline-block rounded border  border-current px-8 py-3 text-sm font-medium text-amber-900 transition hover:shadow-2xl focus:outline-none focus:ring active:text-amber-900 w-full text-center"
+                href="/download"
+              >
+                View Details
+              </a>
             </Link>
 
-            <Link to="/productDetail"  class="block">
+            <Link to="/productDetail" class="block">
               <div class="flex justify-center">
                 <strong class="relative h-6 bg-black px-4 text-xs uppercase leading-6 text-white">
                   New
@@ -87,9 +99,15 @@ const Products = () => {
 
                 <p class="text-xs uppercase tracking-wide">6 Colors</p>
               </div>
+              <a
+                class="mt-5 inline-block rounded border  border-current px-8 py-3 text-sm font-medium text-amber-900 transition hover:shadow-2xl focus:outline-none focus:ring active:text-amber-900 w-full text-center"
+                href="/download"
+              >
+                View Details
+              </a>
             </Link>
 
-            <Link to="/productDetail"  class="block">
+            <Link to="/productDetail" class="block">
               <div class="flex justify-center">
                 <strong class="relative h-6 bg-black px-4 text-xs uppercase leading-6 text-white">
                   New
@@ -111,6 +129,12 @@ const Products = () => {
 
                 <p class="text-xs uppercase tracking-wide">6 Colors</p>
               </div>
+              <a
+                class="mt-5 inline-block rounded border  border-current px-8 py-3 text-sm font-medium text-amber-900 transition hover:shadow-2xl focus:outline-none focus:ring active:text-amber-900 w-full text-center"
+                href="/download"
+              >
+                View Details
+              </a>
             </Link>
           </div>
         </div>
