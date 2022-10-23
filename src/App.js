@@ -10,10 +10,11 @@ import Rabusta from "./Components/Pages/Rabusta";
 import RedEye from "./Components/Pages/RedEye";
 import Americano from "./Components/Pages/Americano";
 import Footer from "./Components/Shared/Footer";
+import ProductDetails from "./Components/ProductDetails";
 
 function App() {
   return (
-    <div className="bg-black">
+    <div className="">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -21,11 +22,13 @@ function App() {
         <Route path="/rabusta" element={<Rabusta />} />
         <Route path="/redeye" element={<RedEye />} />
         <Route path="/americano" element={<Americano />} />
+        <Route path="/productDetail" element={<ProductDetails />} />
         <Route path="/login" element={<Login />} />
 
         <Route path="/signup" element={<Signup />} />
       </Routes>
       <Footer />
+      
     </div>
   );
 }

@@ -13,6 +13,7 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
