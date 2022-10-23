@@ -14,25 +14,18 @@ import Footer from "./Components/Shared/Footer";
 function App() {
   return (
     <div className="bg-black">
-      <Navbar/>
+      <Navbar />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <RequireAuth>
-              <Home />
-            </RequireAuth>
-          }
-        />
+        <Route path="/" element={<Home />} />
         <Route path="/arabica" element={<Arabica />} />
         <Route path="/rabusta" element={<Rabusta />} />
         <Route path="/redeye" element={<RedEye />} />
-        <Route path="/americano" element={<Americano/>} />
+        <Route path="/americano" element={<Americano />} />
         <Route path="/login" element={<Login />} />
-        
+
         <Route path="/signup" element={<Signup />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

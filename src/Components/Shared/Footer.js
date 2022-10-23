@@ -3,7 +3,7 @@ import image from "../../Images//coffee-1974841__340.jpg"
 
 const Footer = () => {
   return (
-    <div className=" mt-28">
+    <div className=" ">
       <footer
         aria-label="Site Footer"
         class="bg-black text-white lg:grid lg:grid-cols-5"
