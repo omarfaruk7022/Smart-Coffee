@@ -54,7 +54,7 @@ const Navbar = () => {
                     </button>
                   ) : (
                     <Link
-                      className="block h-12 font-bold leading-[3rem] text-[13px] border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current "
+                      className="block h-12   leading-[3rem] text-[13px] border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current "
                       to="/login"
                     >
                       Login
@@ -97,14 +97,12 @@ const Navbar = () => {
         <div className="lg:mr-28">
           {user?.displayName && (
             <>
-              <p className="text-[11px] mt-3.5 font-bold">
-                {user?.displayName}
-              </p>
+              <p className="text-[11px] mt-3.5  ">{user?.displayName}</p>
             </>
           )}
           {user && !user?.displayName && (
             <>
-              <h1 className="text-[11px] mt-3.5 font-bold ">Unknown User</h1>
+              <h1 className="text-[11px] mt-3.5   ">Unknown User</h1>
             </>
           )}
           {user?.photoURL && (

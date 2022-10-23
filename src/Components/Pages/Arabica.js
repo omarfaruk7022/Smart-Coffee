@@ -8,14 +8,14 @@ const Arabica = () => {
 
         <div class="relative lg:ml-52 max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center ">
           <div class="max-w-xl text-center sm:text-left">
-            <h1 class="text-3xl font-bold sm:text-5xl lg:mt-12  text-black">
+            <h1 class="text-3xl   sm:text-5xl lg:mt-12  text-black">
               Your guide to
-              <strong class="block font-bold text-accent">
+              <strong class="block   text-accent">
                 the world of <br /> drinking great <br /> coffee.
               </strong>
             </h1>
 
-            <div className="font-bold">
+            <div className=" ">
               <p class="mt-4 max-w-lg sm:text-xl sm:leading-relaxed">
                 Your guide to the world of drinking great coffee.
               </p>

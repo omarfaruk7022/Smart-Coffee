@@ -52,7 +52,6 @@ const Login = () => {
   return (
     <div>
       <div className="grid lg:grid-cols-2 grid-cols-1 ">
-        
         <img
           className="lg:block hidden mt-28 ml-28 h-[700px] rounded shadow-lg"
           src={image}
@@ -64,9 +63,7 @@ const Login = () => {
           </div>
           <div className="card w-96 bg-base-100 shadow-xl  lg:mx-0">
             <div className="card-body">
-              <h2 className="text-center text-2xl font-bold text-primary">
-                Login
-              </h2>
+              <h2 className="text-center text-2xl   text-primary">Login</h2>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control w-full max-w-xs">
                   <label className="label">

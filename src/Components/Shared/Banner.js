@@ -8,21 +8,21 @@ const Banner = () => {
 
         <div class="relative lg:ml-52 max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center ">
           <div class="max-w-xl text-center sm:text-left">
-            <h1 class="text-3xl font-bold sm:text-5xl lg:mt-12  text-white">
+            <h1 class="text-3xl   sm:text-5xl lg:mt-12  text-white">
               Your guide to
-              <strong class="block font-bold text-red-400">
+              <strong class="block   text-red-400">
                 the world of <br /> drinking great <br /> coffee.
               </strong>
             </h1>
 
-            <div className="font-bold text-gray-300">
+            <div className="  text-gray-300">
               <p class="mt-4 max-w-lg sm:text-xl sm:leading-relaxed">
                 Your guide to the world of drinking great coffee.
               </p>
               <p>
-                The suppliers and producers we work with are at the top of <br /> their
-                game. It’s our role to carry the magic from their hands to <br /> your
-                table.
+                The suppliers and producers we work with are at the top of{" "}
+                <br /> their game. It’s our role to carry the magic from their
+                hands to <br /> your table.
               </p>
             </div>
           </div>
