@@ -1,9 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import bag1 from "../../src//Images//bag-2.png";
 import bag2 from "../../src//Images//bag-3.png";
 
 const Products = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [products, setProducts] = useState();
+  useEffect(() => {
+    fetch("http://localhost:5000/products")
+      .then((res) => res.json())
+      .then((json) => setProducts(json));
+  }, []);
+
   return (
     <div>
       <section>
@@ -15,127 +24,40 @@ const Products = () => {
               Trainers
             </h2>
           </div>
+          <div className="grid grid-cols-4 gap-x-4 gap-y-8">
+            {products?.map((product) => (
+              <>
+                <div class="mt-8 ">
+                  <a class="block">
+                    <div class="flex justify-center">
+                      <strong class="relative h-6 bg-black px-4 text-xs uppercase leading-6 text-white">
+                        New
+                      </strong>
+                    </div>
 
-          <div class="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-4">
-            <Link to="/productDetail" class="block">
-              <div class="flex justify-center">
-                <strong class="relative h-6 bg-black px-4 text-xs uppercase leading-6 text-white">
-                  New
-                </strong>
-              </div>
+                    <img
+                      alt="Trainer"
+                      src={bag1}
+                      class="-mt-3 w-full h-96  object-cover"
+                    />
 
-              <img
-                alt="Trainer"
-                src={bag1}
-                class="-mt-3 h-96 w-full object-cover"
-              />
+                    <h3 class="mt-4 text-sm text-black/90">{product?.stock}</h3>
 
-              <h3 class="mt-4 text-sm text-black/90">
-                Limited Edition Sports Trainer
-              </h3>
+                    <div class="mt-4 flex items-center justify-between font-bold">
+                      <p class="text-lg">$189.99</p>
 
-              <div class="mt-4 flex items-center justify-between font-bold">
-                <p class="text-lg">$189.99</p>
-
-                <p class="text-xs uppercase tracking-wide">6 Colors</p>
-              </div>
-              <a
-                class="mt-5 inline-block rounded border  border-current px-8 py-3 text-sm font-medium text-amber-900 transition hover:shadow-2xl focus:outline-none focus:ring active:text-amber-900 w-full text-center"
-                href="/download"
-              >
-                View Details
-              </a>
-            </Link>
-
-            <Link to="/productDetail" class="block">
-              <div class="flex justify-center">
-                <strong class="relative h-6 bg-black px-4 text-xs uppercase leading-6 text-white">
-                  New
-                </strong>
-              </div>
-
-              <img
-                alt="Trainer"
-                src={bag2}
-                class="-mt-3 h-96 w-full object-cover"
-              />
-
-              <h3 class="mt-4 text-sm text-black/90">
-                Limited Edition Sports Trainer
-              </h3>
-
-              <div class="mt-4 flex items-center justify-between font-bold">
-                <p class="text-lg">$189.99</p>
-
-                <p class="text-xs uppercase tracking-wide">6 Colors</p>
-              </div>
-              <a
-                class="mt-5 inline-block rounded border  border-current px-8 py-3 text-sm font-medium text-amber-900 transition hover:shadow-2xl focus:outline-none focus:ring active:text-amber-900 w-full text-center"
-                href="/download"
-              >
-                View Details
-              </a>
-            </Link>
-
-            <Link to="/productDetail" class="block">
-              <div class="flex justify-center">
-                <strong class="relative h-6 bg-black px-4 text-xs uppercase leading-6 text-white">
-                  New
-                </strong>
-              </div>
-
-              <img
-                alt="Trainer"
-                src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                class="-mt-3 h-96 w-full object-cover"
-              />
-
-              <h3 class="mt-4 text-sm text-black/90">
-                Limited Edition Sports Trainer
-              </h3>
-
-              <div class="mt-4 flex items-center justify-between font-bold">
-                <p class="text-lg">$189.99</p>
-
-                <p class="text-xs uppercase tracking-wide">6 Colors</p>
-              </div>
-              <a
-                class="mt-5 inline-block rounded border  border-current px-8 py-3 text-sm font-medium text-amber-900 transition hover:shadow-2xl focus:outline-none focus:ring active:text-amber-900 w-full text-center"
-                href="/download"
-              >
-                View Details
-              </a>
-            </Link>
-
-            <Link to="/productDetail" class="block">
-              <div class="flex justify-center">
-                <strong class="relative h-6 bg-black px-4 text-xs uppercase leading-6 text-white">
-                  New
-                </strong>
-              </div>
-
-              <img
-                alt="Trainer"
-                src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                class="-mt-3 h-96 w-full object-cover"
-              />
-
-              <h3 class="mt-4 text-sm text-black/90">
-                Limited Edition Sports Trainer
-              </h3>
-
-              <div class="mt-4 flex items-center justify-between font-bold">
-                <p class="text-lg">$189.99</p>
-
-                <p class="text-xs uppercase tracking-wide">6 Colors</p>
-              </div>
-              <a
-                class="mt-5 inline-block rounded border  border-current px-8 py-3 text-sm font-medium text-amber-900 transition hover:shadow-2xl focus:outline-none focus:ring active:text-amber-900 w-full text-center"
-                href="/download"
-              >
-                View Details
-              </a>
-            </Link>
+                      <p class="text-xs uppercase tracking-wide">6 Colors</p>
+                    </div>
+                    <button
+                      onClick={() => navigate(`/productDetail/${product?._id}`)}
+                      class="mt-5 inline-block rounded border  border-current px-8 py-3 text-sm font-medium text-amber-900 transition hover:shadow-2xl focus:outline-none focus:ring active:text-amber-900 w-full text-center"
+                    >
+                      View Details
+                    </button>
+                  </a>
+                </div>
+              </>
+            ))}
           </div>
         </div>
       </section>

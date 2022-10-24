@@ -1,0 +1,56 @@
+[
+{
+    "name": "Mocka",
+    "stock": "Limited",
+    "price": 1.1,
+    "flavor": "Strawberry",
+    "flavor3": "Chocolate",
+    "flavor2": "Vanilla"
+},
+{
+    "name": "Mocka",
+    "stock": "Limited",
+    "price": 1.99,
+    "flavor": "Strawberry",
+    "flavor3": "Chocolate",
+    "flavor2": "Vanilla"
+
+},
+{
+    "name": "Mocka",
+    "stock": "Limited",
+    "price": 1.99,
+    "flavor": "Strawberry",
+    "flavor3": "Chocolate",
+    "flavor2": "Vanilla"
+
+},
+{
+    "name": "Mocka",
+    "stock": "Limited",
+    "price": 1.99,
+    "flavor": "Strawberry",
+    "flavor3": "Chocolate",
+    "flavor2": "Vanilla"
+
+},
+{
+    "name": "Mocka",
+    "stock": "Limited",
+    "price": 1.99,
+    "flavor": "Strawberry",
+    "flavor3": "Chocolate",
+    "flavor2": "Vanilla"
+
+},
+{
+    "name": "Water",
+    "stock": "Not Available",
+    "price": 1.99,
+    "flavor": "Chocolate",
+    "flavor3": "Chocolate",
+    "flavor2": "Vanilla"
+
+}
+
+]

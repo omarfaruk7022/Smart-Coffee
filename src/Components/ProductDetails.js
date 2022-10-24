@@ -1,7 +1,71 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import swal from "sweetalert";
 import image1 from "../../src//Images///coffee-2676642_960_720.jpg";
 
 const ProductDetails = () => {
+  const { id } = useParams();
+  console.log(id);
+  const [product, setProduct] = useState();
+  useEffect(() => {
+    fetch(`http://localhost:5000/products/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setProduct(data);
+      });
+  }, [id]);
+  const [packagePrice, setPackagePrice] = useState();
+  const [finalPrice, setFinalPrice] = useState();
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    const flavour = e.target.flavour.value;
+    const quantity = e.target.quantity.value;
+    const packages = e.target.package.value;
+    const name = product?.name;
+    const price = packagePrice;
+    const inputData = {
+      flavour,
+      quantity,
+      packages,
+      name,
+      price,
+    };
+
+    if (packages === "1 Person") {
+      let personPrice = product?.price * 1 * quantity;
+      setPackagePrice(personPrice);
+    } else if (packages === "2 Person") {
+      let personPrice = product?.price * 2 * quantity;
+      let twoPrice = personPrice - Number(0.25);
+      setPackagePrice(twoPrice);
+    } else if (packages === "3 Person") {
+      let personPrice = product?.price * 3 * quantity;
+      let threePrice = personPrice - Number(0.75);
+      setPackagePrice(threePrice);
+    } else if (packages === "Family") {
+      let personPrice = product?.price * 4 * quantity;
+      let familyPrice = personPrice - Number(1);
+      setPackagePrice(familyPrice);
+    }
+    if (flavour && quantity && packages && name && price !== undefined) {
+      fetch("http://localhost:5000/addToCart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(inputData),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          swal("Product Added!", "Product Added!", "success");
+        });
+      e.target.reset();
+    }
+    console.log(packagePrice);
+  };
+ 
   return (
     <div>
       <section>
@@ -36,9 +100,7 @@ const ProductDetails = () => {
 
               <div class="mt-8 flex justify-between">
                 <div class="max-w-[35ch]">
-                  <h1 class="text-2xl font-bold">
-                    Fun Product That Does Something Cool
-                  </h1>
+                  <h1 class="text-2xl font-bold">{product?.name}</h1>
 
                   <p class="mt-0.5 text-sm">Highest Rated Product</p>
 
@@ -89,8 +151,11 @@ const ProductDetails = () => {
                     </svg>
                   </div>
                 </div>
-
-                <p class="text-lg font-bold">$119.99</p>
+                {packagePrice && (
+                  <>
+                    <p class="text-lg font-bold">$ {packagePrice}</p>
+                  </>
+                )}
               </div>
 
               <details class="group relative mt-4">
@@ -128,48 +193,121 @@ const ProductDetails = () => {
                 </div>
               </details>
 
-              <form class="mt-8">
+              <form class="mt-8" onSubmit={handleAddToCart}>
                 <fieldset>
-                  <legend class="mb-1 text-sm font-medium">Color</legend>
+                  <legend class="mb-1 text-sm font-medium">Flavour</legend>
 
                   <div class="flow-root">
                     <div class="-m-0.5 flex flex-wrap">
-                      <label for="color_tt" class="cursor-pointer p-0.5">
+                      {product?.flavor3 && (
+                        <>
+                          <label class="cursor-pointer p-0.5">
+                            <input
+                              type="radio"
+                              name="flavour"
+                              class="peer sr-only"
+                              value={product?.flavor3}
+                            />
+
+                            <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
+                              {product?.flavor3}
+                            </span>
+                          </label>
+                        </>
+                      )}
+                      {product?.flavor2 && (
+                        <>
+                          <label class="cursor-pointer p-0.5">
+                            <input
+                              type="radio"
+                              name="flavour"
+                              class="peer sr-only"
+                              value={product?.flavor2}
+                            />
+
+                            <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
+                              {product?.flavor2}
+                            </span>
+                          </label>
+                        </>
+                      )}
+                      {product?.flavor && (
+                        <>
+                          <label class="cursor-pointer p-0.5">
+                            <input
+                              type="radio"
+                              name="flavour"
+                              class="peer sr-only"
+                              value={product?.flavor}
+                            ></input>
+                            <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
+                              {product?.flavor}
+                            </span>
+                          </label>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </fieldset>
+
+                <fieldset class="mt-4">
+                  <legend class="mb-1 text-sm font-medium">Package</legend>
+
+                  <div class="flow-root">
+                    <div class="-m-0.5 flex flex-wrap">
+                      <label for="size_xs" class="cursor-pointer p-0.5">
                         <input
                           type="radio"
-                          name="color"
-                          id="color_tt"
+                          name="package"
+                          id="size_xs"
                           class="peer sr-only"
+                          value="1 Person"
                         />
 
                         <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
-                          Texas Tea
+                          1 Person
                         </span>
                       </label>
 
-                      <label for="color_fr" class="cursor-pointer p-0.5">
+                      <label for="size_s" class="cursor-pointer p-0.5">
                         <input
                           type="radio"
-                          name="color"
-                          id="color_fr"
+                          name="package"
+                          id="size_s"
                           class="peer sr-only"
+                          value="2 Person"
                         />
 
                         <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
-                          Fiesta Red
+                          2 Person
                         </span>
                       </label>
 
-                      <label for="color_cb" class="cursor-pointer p-0.5">
+                      <label for="size_m" class="cursor-pointer p-0.5">
                         <input
                           type="radio"
-                          name="color"
-                          id="color_cb"
+                          name="package"
+                          id="size_m"
                           class="peer sr-only"
+                          value="3 Person"
                         />
 
                         <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
-                          Cobalt Blue
+                          3 Person
+                        </span>
+                      </label>
+
+                      <label for="size_xl" class="cursor-pointer p-0.5">
+                        <input
+                          type="radio"
+                          name="package"
+                          id="size_xl"
+                          class="peer sr-only"
+                          value="Family"
+                        />
+
+                        <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
+                          Family
                         </span>
                       </label>
                     </div>
@@ -177,100 +315,37 @@ const ProductDetails = () => {
                 </fieldset>
 
                 <fieldset class="mt-4">
-                  <legend class="mb-1 text-sm font-medium">Size</legend>
-
-                  <div class="flow-root">
-                    <div class="-m-0.5 flex flex-wrap">
-                      <label for="size_xs" class="cursor-pointer p-0.5">
-                        <input
-                          type="radio"
-                          name="size"
-                          id="size_xs"
-                          class="peer sr-only"
-                        />
-
-                        <span class="group inline-flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium peer-checked:bg-black peer-checked:text-white">
-                          XS
-                        </span>
-                      </label>
-
-                      <label for="size_s" class="cursor-pointer p-0.5">
-                        <input
-                          type="radio"
-                          name="size"
-                          id="size_s"
-                          class="peer sr-only"
-                        />
-
-                        <span class="group inline-flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium peer-checked:bg-black peer-checked:text-white">
-                          S
-                        </span>
-                      </label>
-
-                      <label for="size_m" class="cursor-pointer p-0.5">
-                        <input
-                          type="radio"
-                          name="size"
-                          id="size_m"
-                          class="peer sr-only"
-                        />
-
-                        <span class="group inline-flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium peer-checked:bg-black peer-checked:text-white">
-                          M
-                        </span>
-                      </label>
-
-                      <label for="size_l" class="cursor-pointer p-0.5">
-                        <input
-                          type="radio"
-                          name="size"
-                          id="size_l"
-                          class="peer sr-only"
-                        />
-
-                        <span class="group inline-flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium peer-checked:bg-black peer-checked:text-white">
-                          L
-                        </span>
-                      </label>
-
-                      <label for="size_xl" class="cursor-pointer p-0.5">
-                        <input
-                          type="radio"
-                          name="size"
-                          id="size_xl"
-                          class="peer sr-only"
-                        />
-
-                        <span class="group inline-flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium peer-checked:bg-black peer-checked:text-white">
-                          XL
-                        </span>
-                      </label>
+                  <legend class="mb-1 text-sm font-medium">Quantity</legend>
+                  <div class=" flex">
+                    <div>
+                      <input
+                        name="quantity"
+                        type="number"
+                        id="quantity"
+                        min="1"
+                        defaultValue={1}
+                        
+                        class="w-12 rounded border-gray-200 py-3 text-center text-xs [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+                      />
                     </div>
+                    {packagePrice === undefined ? (
+                      <>
+                        <button class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500">
+                          See Your cost
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          type="submit"
+                          class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
+                        >
+                          Add to Cart
+                        </button>
+                      </>
+                    )}
                   </div>
                 </fieldset>
-
-                <div class="mt-8 flex">
-                  <div>
-                    <label for="quantity" class="sr-only">
-                      Qty
-                    </label>
-
-                    <input
-                      type="number"
-                      id="quantity"
-                      min="1"
-                      defaultValue={1}
-                      class="w-12 rounded border-gray-200 py-3 text-center text-xs [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
-                  >
-                    Add to Cart
-                  </button>
-                </div>
               </form>
             </div>
           </div>

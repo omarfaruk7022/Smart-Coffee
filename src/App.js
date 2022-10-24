@@ -22,7 +22,7 @@ function App() {
         <Route path="/rabusta" element={<Rabusta />} />
         <Route path="/redeye" element={<RedEye />} />
         <Route path="/americano" element={<Americano />} />
-        <Route path="/productDetail" element={<ProductDetails />} />
+        <Route path="/productDetail/:id" element={<ProductDetails />} />
         <Route path="/login" element={<Login />} />
 
         <Route path="/signup" element={<Signup />} />
