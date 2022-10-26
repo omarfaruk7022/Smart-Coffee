@@ -9,7 +9,9 @@ const ProductDetails = () => {
   console.log(id);
   const [product, setProduct] = useState();
   useEffect(() => {
-    fetch(`http://localhost:5000/products/${id}`)
+    fetch(
+      ` https://smart-coffee-server-production.up.railway.app/products/${id}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
@@ -57,13 +59,16 @@ const ProductDetails = () => {
     }
 
     if (flavour && quantity && packages && name && price !== undefined) {
-      fetch("http://localhost:5000/addToCart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(inputData),
-      })
+      fetch(
+        " https://smart-coffee-server-production.up.railway.app/addToCart",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(inputData),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
@@ -76,9 +81,7 @@ const ProductDetails = () => {
   const handleFlavourChange = (e) => {
     setChanged(true);
   };
-  const handleSeeBtn = (e) => {
- 
-}
+  const handleSeeBtn = (e) => {};
 
   return (
     <div>
@@ -351,16 +354,16 @@ const ProductDetails = () => {
                     </div>
 
                     <>
-                    {changed === true && (
-                      <>
-                        <button
-                          onClick={handleSeeBtn}
-                          class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
-                        >
-                          See Your cost
-                        </button>
-                      </>
-                    )}
+                      {changed === true && (
+                        <>
+                          <button
+                            onClick={handleSeeBtn}
+                            class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
+                          >
+                            See Your cost
+                          </button>
+                        </>
+                      )}
                       <button
                         type="submit"
                         class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
