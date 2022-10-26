@@ -16,12 +16,13 @@ const ProductDetails = () => {
       });
   }, [id]);
   const [packagePrice, setPackagePrice] = useState();
-  const [filledUp, setFilledUp] = useState(false);
+  const [changed, setChanged] = useState(false);
+
   const [show, setShow] = useState(false);
 
   const showComponent = () => {
     setShow(true);
-  }
+  };
 
   const handleAddToCart = (e) => {
     e.preventDefault();
@@ -54,6 +55,7 @@ const ProductDetails = () => {
       let familyPrice = personPrice - Number(1);
       setPackagePrice(familyPrice);
     }
+
     if (flavour && quantity && packages && name && price !== undefined) {
       fetch("http://localhost:5000/addToCart", {
         method: "POST",
@@ -69,17 +71,15 @@ const ProductDetails = () => {
         });
       e.target.reset();
     }
-    console.log(packagePrice);
   };
 
   const handleFlavourChange = (e) => {
-   
-   
-    setFilledUp(true);
-  }
-
-  
+    setChanged(true);
+  };
+  const handleSeeBtn = (e) => {
  
+}
+
   return (
     <div>
       <section>
@@ -221,7 +221,7 @@ const ProductDetails = () => {
                               name="flavour"
                               class="peer sr-only"
                               value={product?.flavor3}
-                               onChange={handleFlavourChange}
+                              onChange={handleFlavourChange}
                             />
 
                             <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
@@ -279,6 +279,7 @@ const ProductDetails = () => {
                           id="size_xs"
                           class="peer sr-only"
                           value="1 Person"
+                          onChange={handleFlavourChange}
                         />
 
                         <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
@@ -293,6 +294,7 @@ const ProductDetails = () => {
                           id="size_s"
                           class="peer sr-only"
                           value="2 Person"
+                          onChange={handleFlavourChange}
                         />
 
                         <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
@@ -307,6 +309,7 @@ const ProductDetails = () => {
                           id="size_m"
                           class="peer sr-only"
                           value="3 Person"
+                          onChange={handleFlavourChange}
                         />
 
                         <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
@@ -321,6 +324,7 @@ const ProductDetails = () => {
                           id="size_xl"
                           class="peer sr-only"
                           value="Family"
+                          onChange={handleFlavourChange}
                         />
 
                         <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
@@ -341,33 +345,41 @@ const ProductDetails = () => {
                         id="quantity"
                         min="1"
                         defaultValue={1}
-                        
+                        onChange={handleFlavourChange}
                         class="w-12 rounded border-gray-200 py-3 text-center text-xs [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
                       />
                     </div>
-                    {packagePrice === undefined || filledUp === false  ? (
+
+                    <>
+                    {changed === true && (
                       <>
-                        <button class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500">
+                        <button
+                          onClick={handleSeeBtn}
+                          class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
+                        >
                           See Your cost
                         </button>
                       </>
-                    ) : (
-                      <>
-                        <button
-                          type="submit"
-                          class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
-                        >
-                          Add to Cart
-                        </button>
-                      </>
                     )}
-                    <button className="btn btn-outline ml-2 " onClick={showComponent}>View cart</button>
-                    
-
-                   <ViewCart show={show} setShow={(bool) => setShow(bool)} product={product} />
+                      <button
+                        type="submit"
+                        class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
+                      >
+                        Add to Cart
+                      </button>
+                    </>
                   </div>
                 </fieldset>
               </form>
+              <button className="btn btn-outline ml-2 " onClick={showComponent}>
+                View cart
+              </button>
+
+              <ViewCart
+                show={show}
+                setShow={(bool) => setShow(bool)}
+                product={product}
+              />
             </div>
           </div>
         </div>

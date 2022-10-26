@@ -1,16 +1,33 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useQuery } from "react-query";
 
 const ViewCart = ({ show, setShow }) => {
-  const [cartedProduct, setCartedProduct] = useState();
   const [totalPrice, setTotalPrice] = useState();
-
-  useEffect(() => {
-    fetch("https://smart-coffee-server-production.up.railway.app/cartList")
+  const {
+    data: cartedProduct,
+    isLoading,
+    refetch,
+  } = useQuery("cartedProduct", () =>
+    fetch(
+      ` https://smart-coffee-server-production.up.railway.app/cartList`,
+      {
+        method: "GET",
+      }
+    )
       .then((res) => res.json())
-      .then((json) => setCartedProduct(json));
-  }, []);
+      .then((data) => {
+        return data;
+      })
+  );
+ 
+  refetch();
+//   useEffect(() => {
+//     fetch("https://smart-coffee-server-production.up.railway.app/cartList")
+//       .then((res) => res.json())
+//       .then((json) => setCartedProduct(json));
+//   }, []);
   useEffect(() => {
       const total = cartedProduct?.reduce((total, prd) => total + prd.price, 0);
       setTotalPrice(total);
