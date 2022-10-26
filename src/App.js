@@ -11,6 +11,7 @@ import RedEye from "./Components/Pages/RedEye";
 import Americano from "./Components/Pages/Americano";
 import Footer from "./Components/Shared/Footer";
 import ProductDetails from "./Components/ProductDetails";
+import ViewCart from "./Components/ViewCart";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
         <Route path="/rabusta" element={<Rabusta />} />
         <Route path="/redeye" element={<RedEye />} />
         <Route path="/americano" element={<Americano />} />
-        <Route path="/productDetail/:id" element={<ProductDetails />} />
+        <Route path="/productDetail/:id" element={<ProductDetails />} /> 
+        <Route path="/viewCart" element={<ViewCart />} /> 
         <Route path="/login" element={<Login />} />
 
         <Route path="/signup" element={<Signup />} />

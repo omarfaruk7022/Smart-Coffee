@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert";
 import image1 from "../../src//Images///coffee-2676642_960_720.jpg";
+import ViewCart from "./ViewCart";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -15,7 +16,12 @@ const ProductDetails = () => {
       });
   }, [id]);
   const [packagePrice, setPackagePrice] = useState();
-  const [finalPrice, setFinalPrice] = useState();
+  const [filledUp, setFilledUp] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const showComponent = () => {
+    setShow(true);
+  }
 
   const handleAddToCart = (e) => {
     e.preventDefault();
@@ -65,6 +71,14 @@ const ProductDetails = () => {
     }
     console.log(packagePrice);
   };
+
+  const handleFlavourChange = (e) => {
+   
+   
+    setFilledUp(true);
+  }
+
+  
  
   return (
     <div>
@@ -207,6 +221,7 @@ const ProductDetails = () => {
                               name="flavour"
                               class="peer sr-only"
                               value={product?.flavor3}
+                               onChange={handleFlavourChange}
                             />
 
                             <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
@@ -223,6 +238,7 @@ const ProductDetails = () => {
                               name="flavour"
                               class="peer sr-only"
                               value={product?.flavor2}
+                              onChange={handleFlavourChange}
                             />
 
                             <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
@@ -239,6 +255,7 @@ const ProductDetails = () => {
                               name="flavour"
                               class="peer sr-only"
                               value={product?.flavor}
+                              onChange={handleFlavourChange}
                             ></input>
                             <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
                               {product?.flavor}
@@ -328,7 +345,7 @@ const ProductDetails = () => {
                         class="w-12 rounded border-gray-200 py-3 text-center text-xs [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
                       />
                     </div>
-                    {packagePrice === undefined ? (
+                    {packagePrice === undefined || filledUp === false  ? (
                       <>
                         <button class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500">
                           See Your cost
@@ -344,6 +361,10 @@ const ProductDetails = () => {
                         </button>
                       </>
                     )}
+                    <button className="btn btn-outline ml-2 " onClick={showComponent}>View cart</button>
+                    
+
+                   <ViewCart show={show} setShow={(bool) => setShow(bool)} product={product} />
                   </div>
                 </fieldset>
               </form>

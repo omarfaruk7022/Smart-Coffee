@@ -12,6 +12,7 @@ const Home = () => {
       <Gallery/>
       <Prices/>
       <Products/>
+      
     </div>
   );
 };
