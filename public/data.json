@@ -1,21 +1,23 @@
 [
 {
-    "name": "Mocka",
-    "stock": "Limited",
+    "name": "Breve",
+    "stock": "Not Available",
     "price": 1.1,
     "flavor": "Strawberry",
     "flavor3": "Chocolate",
-    "flavor2": "Vanilla"
+    "flavor2": "Vanilla",
+    "image" : "https://i.ibb.co/CJLCvQc/coffee-beans-2258869-340.jpg"
 },
 {
-    "name": "Mocka",
-    "stock": "Limited",
-    "price": 1.99,
+    "name": "Cappuccino",
+    "stock": "Available",
+    "price": 1.5,
     "flavor": "Strawberry",
     "flavor3": "Chocolate",
-    "flavor2": "Vanilla"
-
-},
+    "flavor2": "Vanilla",
+    "image" : "https://i.ibb.co/pZs54R6/coffee-563797-960-720.jpg"
+}
+,
 {
     "name": "Mocka",
     "stock": "Limited",

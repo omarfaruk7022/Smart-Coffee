@@ -48,7 +48,7 @@ const Products = () => {
                     <div class="mt-4 flex items-center justify-between font-bold">
                       <p class="text-lg">$ {product?.price}</p>
 
-                      <p class="text-xs uppercase tracking-wide">6 Colors</p>
+                      <p class="text-xs uppercase tracking-wide">{product?.stock}</p>
                     </div>
                     <button
                       onClick={() => navigate(`/productDetail/${product?._id}`)}
