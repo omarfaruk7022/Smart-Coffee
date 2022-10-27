@@ -8,7 +8,7 @@ const Products = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState();
   useEffect(() => {
-    fetch("http://localhost:5000/products")
+    fetch(" https://smart-coffee-server-production.up.railway.app/products")
       .then((res) => res.json())
       .then((json) => setProducts(json));
   }, []);
@@ -20,8 +20,8 @@ const Products = () => {
           <div>
             <span class="inline-block h-1 w-12 bg-red-700"></span>
 
-            <h2 class="mt-1 text-2xl font-extrabold uppercase tracking-wide lg:text-3xl">
-              Trainers
+            <h2 class="mt-1 text-2xl font-extrabold  tracking-wide lg:text-3xl uppercase ">
+              Coffee
             </h2>
           </div>
           <div className="grid lg:grid-cols-4 grid-cols-1 gap-x-4 gap-y-8">
@@ -37,14 +37,16 @@ const Products = () => {
 
                     <img
                       alt="Trainer"
-                      src={bag1}
+                      src={product?.image}
                       class="-mt-3 w-full h-96  object-cover"
                     />
 
-                    <h3 class="mt-4 text-sm text-black/90">{product?.stock}</h3>
+                    <h3 class="mt-4 text-xl font-bold text-amber-900">
+                      {product?.name}
+                    </h3>
 
                     <div class="mt-4 flex items-center justify-between font-bold">
-                      <p class="text-lg">$189.99</p>
+                      <p class="text-lg">$ {product?.price}</p>
 
                       <p class="text-xs uppercase tracking-wide">6 Colors</p>
                     </div>
@@ -61,7 +63,6 @@ const Products = () => {
           </div>
         </div>
       </section>
-      
     </div>
     // <div className="grid lg:grid-cols-3 gap-5 ">
     //   <div className="m-auto">
