@@ -1,30 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert";
 import image1 from "../../src//Images///coffee-2676642_960_720.jpg";
+import auth from "../firebase.init";
 import ViewCart from "./ViewCart";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  console.log(id);
+
   const [product, setProduct] = useState();
   useEffect(() => {
-    fetch(
-      ` https://smart-coffee-server-production.up.railway.app/products/${id}`
-    )
+    fetch(`http://localhost:5000/products/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
       });
   }, [id]);
   const [packagePrice, setPackagePrice] = useState();
-  const [changed, setChanged] = useState(false);
+  const [person, setPerson] = useState();
 
-  const [show, setShow] = useState(false);
-
-  const showComponent = () => {
-    setShow(true);
-  };
+  const [user] = useAuthState(auth);
+  const email = user?.email;
 
   const handleAddToCart = (e) => {
     e.preventDefault();
@@ -33,55 +30,66 @@ const ProductDetails = () => {
     const packages = e.target.package.value;
     const name = product?.name;
     const price = packagePrice;
+
     const inputData = {
       flavour,
       quantity,
       packages,
       name,
       price,
+      email,
     };
 
-    if (packages === "1 Person") {
-      let personPrice = product?.price * 1 * quantity;
-      setPackagePrice(personPrice);
-    } else if (packages === "2 Person") {
-      let personPrice = product?.price * 2 * quantity;
-      let twoPrice = personPrice - Number(0.25);
-      setPackagePrice(twoPrice);
-    } else if (packages === "3 Person") {
-      let personPrice = product?.price * 3 * quantity;
-      let threePrice = personPrice - Number(0.75);
-      setPackagePrice(threePrice);
-    } else if (packages === "Family") {
-      let personPrice = product?.price * 4 * quantity;
-      let familyPrice = personPrice - Number(1);
-      setPackagePrice(familyPrice);
-    }
-
-    if (flavour && quantity && packages && name && price !== undefined) {
-      fetch(
-        " https://smart-coffee-server-production.up.railway.app/addToCart",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(inputData),
-        }
-      )
+    if (
+      flavour &&
+      quantity &&
+      packages &&
+      name &&
+      price !== undefined &&
+      price > 0
+    ) {
+      fetch(`http://localhost:5000/addToCart`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(inputData),
+      })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
-          swal("Product Added!", "Product Added!", "success");
+          swal("Good job!", "Product added !", "success");
         });
-      e.target.reset();
     }
+  };
+  const handlePersonChange = (e) => {
+    setPerson(e.target.value);
   };
 
   const handleFlavourChange = (e) => {
-    setChanged(true);
+    const quantity = e.target.value;
+
+    if (person === "1 Person") {
+      let personPrice = product?.price * 1 * quantity;
+      setPackagePrice(personPrice);
+    } else if (person === "2 Person") {
+      let personPrice = product?.price * 2 * quantity;
+      let twoPrice =
+        personPrice - Number(0.25) > 0 ? personPrice - Number(0.25) : 0;
+      setPackagePrice(twoPrice);
+    } else if (person === "3 Person") {
+      let personPrice = product?.price * 3 * quantity;
+      let threePrice =
+        personPrice - Number(0.75) > 0 ? personPrice - Number(0.75) : 0;
+      setPackagePrice(threePrice);
+    } else if (person === "Family") {
+      let personPrice = product?.price * 4 * quantity;
+      let familyPrice =
+        personPrice - Number(1) > 0 ? personPrice - Number(1) : 0;
+      setPackagePrice(familyPrice);
+    }
+
+    console.log(packagePrice);
   };
-  const handleSeeBtn = (e) => {};
 
   return (
     <div>
@@ -224,7 +232,6 @@ const ProductDetails = () => {
                               name="flavour"
                               class="peer sr-only"
                               value={product?.flavor3}
-                              onChange={handleFlavourChange}
                             />
 
                             <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
@@ -241,7 +248,6 @@ const ProductDetails = () => {
                               name="flavour"
                               class="peer sr-only"
                               value={product?.flavor2}
-                              onChange={handleFlavourChange}
                             />
 
                             <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
@@ -258,7 +264,6 @@ const ProductDetails = () => {
                               name="flavour"
                               class="peer sr-only"
                               value={product?.flavor}
-                              onChange={handleFlavourChange}
                             ></input>
                             <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
                               {product?.flavor}
@@ -282,7 +287,7 @@ const ProductDetails = () => {
                           id="size_xs"
                           class="peer sr-only"
                           value="1 Person"
-                          onChange={handleFlavourChange}
+                          onChange={handlePersonChange}
                         />
 
                         <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
@@ -297,7 +302,7 @@ const ProductDetails = () => {
                           id="size_s"
                           class="peer sr-only"
                           value="2 Person"
-                          onChange={handleFlavourChange}
+                          onChange={handlePersonChange}
                         />
 
                         <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
@@ -312,7 +317,7 @@ const ProductDetails = () => {
                           id="size_m"
                           class="peer sr-only"
                           value="3 Person"
-                          onChange={handleFlavourChange}
+                          onChange={handlePersonChange}
                         />
 
                         <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
@@ -327,7 +332,7 @@ const ProductDetails = () => {
                           id="size_xl"
                           class="peer sr-only"
                           value="Family"
-                          onChange={handleFlavourChange}
+                          onChange={handlePersonChange}
                         />
 
                         <span class="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
@@ -348,22 +353,13 @@ const ProductDetails = () => {
                         id="quantity"
                         min="1"
                         defaultValue={1}
+                        max={10}
                         onChange={handleFlavourChange}
                         class="w-12 rounded border-gray-200 py-3 text-center text-xs [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
                       />
                     </div>
 
                     <>
-                      {changed === true && (
-                        <>
-                          <button
-                            onClick={handleSeeBtn}
-                            class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
-                          >
-                            See Your cost
-                          </button>
-                        </>
-                      )}
                       <button
                         type="submit"
                         class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
@@ -374,15 +370,6 @@ const ProductDetails = () => {
                   </div>
                 </fieldset>
               </form>
-              <button className="btn btn-outline ml-2 " onClick={showComponent}>
-                View cart
-              </button>
-
-              <ViewCart
-                show={show}
-                setShow={(bool) => setShow(bool)}
-                product={product}
-              />
             </div>
           </div>
         </div>

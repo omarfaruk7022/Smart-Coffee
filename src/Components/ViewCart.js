@@ -2,38 +2,36 @@ import React, { useEffect, useState, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useQuery } from "react-query";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../firebase.init";
+import Loader from "./Shared/Loader";
 
 const ViewCart = ({ show, setShow }) => {
   const [totalPrice, setTotalPrice] = useState();
+  const [user] = useAuthState(auth);
+  const email = user?.email;
   const {
     data: cartedProduct,
     isLoading,
     refetch,
   } = useQuery("cartedProduct", () =>
-    fetch(
-      ` https://smart-coffee-server-production.up.railway.app/cartList`,
-      {
-        method: "GET",
-      }
-    )
+    fetch(`http://localhost:5000/cartList/${email}`, {
+      method: "GET",
+    })
       .then((res) => res.json())
       .then((data) => {
         return data;
       })
   );
- 
   refetch();
-//   useEffect(() => {
-//     fetch("https://smart-coffee-server-production.up.railway.app/cartList")
-//       .then((res) => res.json())
-//       .then((json) => setCartedProduct(json));
-//   }, []);
+
   useEffect(() => {
-      const total = cartedProduct?.reduce((total, prd) => total + prd.price, 0);
-      setTotalPrice(total);
-
+    const total = cartedProduct?.reduce((total, prd) => total + prd.price, 0);
+    setTotalPrice(total);
   }, [cartedProduct]);
-
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <div>
       <Transition.Root show={show} as={Fragment}>

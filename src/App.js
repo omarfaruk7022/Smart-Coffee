@@ -23,14 +23,27 @@ function App() {
         <Route path="/rabusta" element={<Rabusta />} />
         <Route path="/redeye" element={<RedEye />} />
         <Route path="/americano" element={<Americano />} />
-        <Route path="/productDetail/:id" element={<ProductDetails />} /> 
-        <Route path="/viewCart" element={<ViewCart />} /> 
+        <Route
+          path="/productDetail/:id"
+          element={
+            <RequireAuth>
+              <ProductDetails />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/viewCart"
+          element={
+            <RequireAuth>
+              <ViewCart />
+            </RequireAuth>
+          }
+        />
         <Route path="/login" element={<Login />} />
 
         <Route path="/signup" element={<Signup />} />
       </Routes>
       <Footer />
-      
     </div>
   );
 }

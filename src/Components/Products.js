@@ -8,7 +8,7 @@ const Products = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState();
   useEffect(() => {
-    fetch(" https://smart-coffee-server-production.up.railway.app/products")
+    fetch("http://localhost:5000/products")
       .then((res) => res.json())
       .then((json) => setProducts(json));
   }, []);
@@ -61,6 +61,7 @@ const Products = () => {
           </div>
         </div>
       </section>
+      
     </div>
     // <div className="grid lg:grid-cols-3 gap-5 ">
     //   <div className="m-auto">
