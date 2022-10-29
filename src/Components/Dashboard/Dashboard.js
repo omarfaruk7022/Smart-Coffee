@@ -6,19 +6,17 @@ const Dashboard = () => {
     <div className="drawer drawer-mobile">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content ">
-        <h2 className="text-2xl font-bold text-purple-500">
-          Welcome to your Dashboard
-        </h2>
+      
         <Outlet />
       </div>
-      <div className="drawer-side">
+      <div className="drawer-side drop-shadow-2xl">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        <ul className="menu p-4 overflow-y-auto w-48 bg-base-100 text-base-content">
-          <li>
-            <Link to="/dashboard/addProduct">Add Product</Link>
+        <ul className="menu  overflow-y-auto w-48 bg-base-100 text-base-content ">
+          <li >
+            <Link  className="block  h-15 leading-[3rem]  border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current " to="/dashboard/addProduct">Add Product</Link>
           </li>
           <li>
-            <Link to="/dashboard/deleteProduct">Delete Product</Link>
+            <Link className="block  h-15 leading-[3rem]  border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current "  to="/dashboard/deleteProduct">Delete Product</Link>
           </li>
        
          
