@@ -12,6 +12,9 @@ import Americano from "./Components/Pages/Americano";
 import Footer from "./Components/Shared/Footer";
 import ProductDetails from "./Components/ProductDetails";
 import ViewCart from "./Components/ViewCart";
+import AllProducts from "./Components/AllProducts";
+import AddProduct from "./Components/Dashboard/AddProduct";
+import Dashboard from "./Components/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -23,6 +26,17 @@ function App() {
         <Route path="/rabusta" element={<Rabusta />} />
         <Route path="/redeye" element={<RedEye />} />
         <Route path="/americano" element={<Americano />} />
+        <Route path="/allProducts" element={<AllProducts />} />
+        <Route
+          path="dashboard"
+          element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          }
+        >
+          <Route path="addProduct" element={<AddProduct></AddProduct>} />
+        </Route>
         <Route
           path="/productDetail/:id"
           element={

@@ -73,12 +73,20 @@ const Navbar = () => {
 
                 <li>
                   {user ? (
-                    <button onClick={handleSignOut} className="btn btn-ghost">
-                      Logout
-                    </button>
+                    <>
+                      <Link
+                        to="/dashboard"
+                        class="block  h-12 leading-[3rem] border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current text-[12px] "
+                      >
+                        Dashboard
+                      </Link>
+                      <button onClick={handleSignOut} className="btn btn-ghost">
+                        Logout
+                      </button>
+                    </>
                   ) : (
                     <Link
-                      className="block h-12   leading-[3rem] text-[13px] border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current "
+                      className="block h-12  leading-[3rem] text-[13px] border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current "
                       to="/login"
                     >
                       Login
@@ -101,6 +109,12 @@ const Navbar = () => {
 
               {user ? (
                 <>
+                  <Link
+                    to="/dashboard"
+                    class="block  h-12 leading-[3rem] border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current text-[14px] "
+                  >
+                    Dashboard
+                  </Link>
                   <button
                     onClick={handleSignOut}
                     className="block h-12 leading-[3rem]  border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current text-[14px] "
@@ -145,20 +159,22 @@ const Navbar = () => {
         <div className="lg:mr-28">
           {user?.displayName && (
             <>
-              <p className="text-[11px] lg:mt-3.5  mr-2 ">
+              <p className="text-[11px] lg:mt-3.5  mr-2  lg:block hidden">
                 {user?.displayName}
               </p>
             </>
           )}
           {user && !user?.displayName && (
             <>
-              <h1 className="text-[11px] lg:mt-3.5  mr-2">Unknown user</h1>
+              <h1 className="text-[11px]  mr-2 lg:block hidden">
+                Unknown user
+              </h1>
             </>
           )}
           {user?.photoURL && (
             <>
-              <div className="avatar online mt-1">
-                <div className="w-10 h-10  rounded-full">
+              <div className="avatar online mt-1 lg:block hidden">
+                <div className="w-12 rounded-full">
                   <img src={user?.photoURL} />
                 </div>
               </div>
@@ -167,22 +183,35 @@ const Navbar = () => {
 
           {user && !user?.photoURL && (
             <>
-              <div class="overflow-hidden relative w-10 h-10 bg-gray-300 rounded-full dark:bg-gray-600">
-                <svg
-                  class="absolute -left-1 w-12 h-12 text-gray-700"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
+              <div className="avatar online lg:block hidden">
+                <div className="w-12 rounded-full ">
+                  <img src="https://placeimg.com/192/192/people" />
+                </div>
               </div>
             </>
           )}
+          <div className="navbar-end">
+            <label
+              tabIndex="1"
+              htmlFor="my-drawer-2"
+              className="btn btn-ghost lg:hidden"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </label>
+          </div>
         </div>
       </div>
 
