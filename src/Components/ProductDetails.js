@@ -43,7 +43,25 @@ const ProductDetails = () => {
       email,
       image,
     };
-
+    if (person === "1 Person") {
+      let personPrice = product?.price * 1 * quantity;
+      setPackagePrice(Number(personPrice));
+    } else if (person === "2 Person") {
+      let personPrice = product?.price * 2 * quantity;
+      let twoPrice =
+        personPrice - Number(0.25) > 0 ? personPrice - Number(0.25) : 0;
+      setPackagePrice(Number(twoPrice));
+    } else if (person === "3 Person") {
+      let personPrice = product?.price * 3 * quantity;
+      let threePrice =
+        personPrice - Number(0.75) > 0 ? personPrice - Number(0.75) : 0;
+      setPackagePrice(Number(threePrice));
+    } else if (person === "Family") {
+      let personPrice = product?.price * 4 * quantity;
+      let familyPrice =
+        personPrice - Number(1) > 0 ? personPrice - Number(1) : 0;
+      setPackagePrice(Number(familyPrice));
+    }
     if (
       flavour &&
       quantity &&
@@ -78,25 +96,23 @@ const ProductDetails = () => {
 
     if (person === "1 Person") {
       let personPrice = product?.price * 1 * quantity;
-      setPackagePrice(personPrice);
+      setPackagePrice(Number(personPrice));
     } else if (person === "2 Person") {
       let personPrice = product?.price * 2 * quantity;
       let twoPrice =
         personPrice - Number(0.25) > 0 ? personPrice - Number(0.25) : 0;
-      setPackagePrice(twoPrice);
+      setPackagePrice(Number(twoPrice));
     } else if (person === "3 Person") {
       let personPrice = product?.price * 3 * quantity;
       let threePrice =
         personPrice - Number(0.75) > 0 ? personPrice - Number(0.75) : 0;
-      setPackagePrice(threePrice);
+      setPackagePrice(Number(threePrice));
     } else if (person === "Family") {
       let personPrice = product?.price * 4 * quantity;
       let familyPrice =
         personPrice - Number(1) > 0 ? personPrice - Number(1) : 0;
-      setPackagePrice(familyPrice);
+      setPackagePrice(Number(familyPrice));
     }
-
-    console.log(packagePrice);
   };
 
   return (
@@ -379,12 +395,25 @@ const ProductDetails = () => {
                     </div>
 
                     <>
-                      <button
-                        type="submit"
-                        class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
-                      >
-                        Add to Cart
-                      </button>
+                      {!packagePrice ? (
+                        <>
+                          <button
+                            type="submit"
+                            class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
+                          >
+                            See Cost
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button
+                            type="submit"
+                            class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
+                          >
+                            Add to Cart
+                          </button>
+                        </>
+                      )}
                     </>
                   </div>
                 </fieldset>
