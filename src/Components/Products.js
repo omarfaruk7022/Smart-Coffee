@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-
 const Products = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [products, setProducts] = useState();
   useEffect(() => {
-    fetch(" https://smart-coffee-server-production.up.railway.app/products")
+    fetch("http://localhost:5000/products")
       .then((res) => res.json())
       .then((json) => setProducts(json));
   }, []);
@@ -24,7 +23,7 @@ const Products = () => {
             </h2>
           </div>
           <div className="grid lg:grid-cols-4 grid-cols-1 gap-x-4 gap-y-8">
-            {products?.slice(0,8).map((product) => (
+            {products?.slice(0, 8).map((product) => (
               <>
                 <div class="mt-8 ">
                   <a class="block">
@@ -47,7 +46,9 @@ const Products = () => {
                     <div class="mt-4 flex items-center justify-between font-bold">
                       <p class="text-lg">$ {product?.price}</p>
 
-                      <p class="text-xs uppercase tracking-wide">{product?.stock}</p>
+                      <p class="text-xs uppercase tracking-wide">
+                        {product?.stock}
+                      </p>
                     </div>
                     <button
                       onClick={() => navigate(`/productDetail/${product?._id}`)}
@@ -59,14 +60,16 @@ const Products = () => {
                 </div>
               </>
             ))}
-
-            
           </div>
         </div>
       </section>
-      <button className="btn btn-outline" onClick={() => navigate(`/allProducts`)}>See more</button>
+      <button
+        className="btn btn-outline"
+        onClick={() => navigate(`/allProducts`)}
+      >
+        See more
+      </button>
     </div>
-  
   );
 };
 

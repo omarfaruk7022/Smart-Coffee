@@ -6,7 +6,7 @@ const AllProducts = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(" https://smart-coffee-server-production.up.railway.app/products")
+    fetch("http://localhost:5000/products")
       .then((res) => res.json())
       .then((json) => setProducts(json));
   }, []);
@@ -22,7 +22,7 @@ const AllProducts = () => {
             </h2>
           </div>
           <div className="grid lg:grid-cols-4 grid-cols-1 gap-x-4 gap-y-8">
-            {products?.slice(0, 8).map((product) => (
+            {products?.map((product) => (
               <>
                 <div class="mt-8 ">
                   <a class="block">

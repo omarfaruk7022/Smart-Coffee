@@ -18,12 +18,9 @@ const Navbar = () => {
     isLoading,
     refetch,
   } = useQuery("cartedProduct", () =>
-    fetch(
-      ` https://smart-coffee-server-production.up.railway.app/cartList/${email}`,
-      {
-        method: "GET",
-      }
-    )
+    fetch(`http://localhost:5000/cartList/${email}`, {
+      method: "GET",
+    })
       .then((res) => res.json())
       .then((data) => {
         return data;

@@ -15,6 +15,7 @@ import ViewCart from "./Components/ViewCart";
 import AllProducts from "./Components/AllProducts";
 import AddProduct from "./Components/Dashboard/AddProduct";
 import Dashboard from "./Components/Dashboard/Dashboard";
+import DeleteProduct from "./Components/Dashboard/DeleteProduct";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           }
         >
           <Route path="addProduct" element={<AddProduct></AddProduct>} />
+          <Route path="deleteProduct" element={<DeleteProduct></DeleteProduct>} />
         </Route>
         <Route
           path="/productDetail/:id"
