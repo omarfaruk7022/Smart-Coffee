@@ -15,9 +15,12 @@ const ViewCart = ({ show, setShow }) => {
     isLoading,
     refetch,
   } = useQuery("cartedProduct", () =>
-    fetch(`http://localhost:5000/cartList/${email}`, {
-      method: "GET",
-    })
+    fetch(
+      ` https://smart-coffee-server-production.up.railway.app/cartList/${email}`,
+      {
+        method: "GET",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         return data;
@@ -34,9 +37,12 @@ const ViewCart = ({ show, setShow }) => {
   }
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/cartList/${id}`, {
-      method: "DELETE",
-    })
+    fetch(
+      ` https://smart-coffee-server-production.up.railway.app/cartList/${id}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

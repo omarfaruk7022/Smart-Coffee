@@ -11,7 +11,9 @@ const ProductDetails = () => {
 
   const [product, setProduct] = useState();
   useEffect(() => {
-    fetch(`http://localhost:5000/products/${id}`)
+    fetch(
+      ` https://smart-coffee-server-production.up.railway.app/products/${id}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
@@ -69,13 +71,16 @@ const ProductDetails = () => {
       price > 0 &&
       image
     ) {
-      fetch(`http://localhost:5000/addToCart`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(inputData),
-      })
+      fetch(
+        ` https://smart-coffee-server-production.up.railway.app/addToCart`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(inputData),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           swal("Good job!", "Product added !", "success");

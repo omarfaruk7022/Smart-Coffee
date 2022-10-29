@@ -15,7 +15,7 @@ const Signup = () => {
     useSignInWithGoogle(auth);
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
-
+  console.log(googleUser?.user?.displayName);
   const navigate = useNavigate();
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
@@ -42,17 +42,19 @@ const Signup = () => {
     const firstName = data.first_name;
     const lastName = data.last_name;
     const name = firstName + " " + lastName;
+
     const userSignupData = {
       email,
       password,
       name,
     };
+
     if (error || googleError) {
       swal("Error", error.message, "error");
       return;
     } else {
       await createUserWithEmailAndPassword(data.email, data.password);
-      fetch("https://visa-processing.onrender.com/users", {
+      fetch(" https://smart-coffee-server-production.up.railway.app/users", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -67,7 +69,7 @@ const Signup = () => {
   };
   return (
     <div>
-        <h1 className="text-6xl text-center underline">Welcome</h1>
+      <h1 className="text-6xl text-center underline">Welcome</h1>
       <div className="lg:flex justify-center items-center h-screen ">
         <form className="" onSubmit={handleSubmit(onSubmit)}>
           <div class="relative z-0 mb-6 w-full group">

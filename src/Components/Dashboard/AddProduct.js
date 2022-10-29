@@ -40,7 +40,7 @@ const AddProduct = () => {
           };
           console.log(inputData);
 
-          fetch("http://localhost:5000/products", {
+          fetch(" https://smart-coffee-server-production.up.railway.app/products", {
             method: "POST",
             headers: {
               "content-type": "application/json",

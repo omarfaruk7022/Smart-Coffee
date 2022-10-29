@@ -6,32 +6,67 @@ import auth from "../../firebase.init";
 import img from "../../../src//Images//logo-white.svg";
 import ViewCart from "../ViewCart";
 import { useQuery } from "react-query";
+import Loader from "./Loader";
 
 const Navbar = () => {
+  const [show, setShow] = useState(false);
   const [user] = useAuthState(auth);
   const email = user?.email;
   const handleSignOut = () => {
     signOut(auth);
   };
+
   const {
     data: cartedProduct,
     isLoading,
     refetch,
   } = useQuery("cartedProduct", () =>
-    fetch(`http://localhost:5000/cartList/${email}`, {
-      method: "GET",
-    })
+    fetch(
+      ` https://smart-coffee-server-production.up.railway.app/cartList/${email}`,
+      {
+        method: "GET",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         return data;
       })
   );
+  const { data: admin } = useQuery("admin", () =>
+    fetch(
+      ` https://smart-coffee-server-production.up.railway.app/users/${email}`,
+      {
+        method: "GET",
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        return data;
+      })
+  );
+  refetch();
+  console.log(admin);
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  //  const { data: admin } = useQuery("admin", () =>
+  //   fetch(` https://smart-coffee-server-production.up.railway.app/users`, {
+  //     method: "GET",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       refetch();
+  //       return data;
+  //     })
+  // );
+
   const total = cartedProduct?.length;
 
-  const [show, setShow] = useState(false);
   const showComponent = () => {
     setShow(true);
   };
+
   return (
     <div className="max-h-screen">
       <div className="navbar  bg-accent h-20 text-white  flex justify-between">
@@ -68,15 +103,19 @@ const Navbar = () => {
                   </Link>
                 </li>
 
+                {admin?.data?.role === "admin" && (
+                  <>
+                    <Link
+                      to="/dashboard"
+                      class="block  h-12 leading-[3rem] border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current text-[12px] "
+                    >
+                      Dashboard
+                    </Link>
+                  </>
+                )}
                 <li>
                   {user ? (
                     <>
-                      <Link
-                        to="/dashboard"
-                        class="block  h-12 leading-[3rem] border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current text-[12px] "
-                      >
-                        Dashboard
-                      </Link>
                       <button onClick={handleSignOut} className="btn btn-ghost">
                         Logout
                       </button>
@@ -104,7 +143,7 @@ const Navbar = () => {
                 Home
               </Link>
 
-              {user ? (
+              {admin?.data?.role === "admin" && (
                 <>
                   <Link
                     to="/dashboard"
@@ -112,6 +151,11 @@ const Navbar = () => {
                   >
                     Dashboard
                   </Link>
+                </>
+              )}
+
+              {user ? (
+                <>
                   <button
                     onClick={handleSignOut}
                     className="block h-12 leading-[3rem]  border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current text-[14px] "

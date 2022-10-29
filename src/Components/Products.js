@@ -6,7 +6,7 @@ const Products = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState();
   useEffect(() => {
-    fetch("http://localhost:5000/products")
+    fetch(" https://smart-coffee-server-production.up.railway.app/products")
       .then((res) => res.json())
       .then((json) => setProducts(json));
   }, []);
@@ -65,7 +65,7 @@ const Products = () => {
         </div>
         <div className="px-52 my-12">
           <button
-          onClick={() => navigate(`/allProducts`)}
+            onClick={() => navigate(`/allProducts`)}
             class="flex ml-auto group relative items-center overflow-hidden rounded-md border border-current px-8 py-3 focus:outline-none focus:ring transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-green-500 duration-300  bg-amber-900 text-white font-bold"
             href="/download"
           >
