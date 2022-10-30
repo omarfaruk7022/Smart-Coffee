@@ -103,12 +103,14 @@ const Navbar = () => {
 
                 {isAdmin?.data?.role === "admin" && (
                   <>
+                  <li>
                     <Link
                       to="/dashboard"
                       class="block  h-12 leading-[3rem] border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current text-[12px] "
                     >
                       Dashboard
                     </Link>
+                    </li>
                   </>
                 )}
                 <li>
