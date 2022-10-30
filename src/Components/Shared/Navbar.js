@@ -6,44 +6,58 @@ import auth from "../../firebase.init";
 import img from "../../../src//Images//logo-white.svg";
 import ViewCart from "../ViewCart";
 import { useQuery } from "react-query";
-import Loader from "./Loader";
+
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
-  const [isAdmin, setIsAdmin] = useState();
+  const [isAdmin, setIsAdmin] = useState(false);
   const [user] = useAuthState(auth);
   const email = user?.email;
   const handleSignOut = () => {
     signOut(auth);
   };
+  //   const [isEmail, setIsEmail] = useState();
+  //   useEffect(() => {
+  //     fetch(` https://smart-coffee-server-production.up.railway.app/users`, {
+  //       method: "GET",
+  //     })
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         setIsEmail(data);
+  //       });
+  //   }, []);
+  // if(isEmail?.email === email ){
+  //   console.log();
 
+  // }
   const {
     data: cartedProduct,
     isLoading,
     refetch,
   } = useQuery("cartedProduct", () =>
-    fetch(`http://localhost:5000/cartList/${email}`, {
-      method: "GET",
-    })
+    fetch(
+      ` https://smart-coffee-server-production.up.railway.app/cartList/${email}`,
+      {
+        method: "GET",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         return data;
       })
   );
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${email}`, {
-      method: "GET",
-    })
+    fetch(
+      ` https://smart-coffee-server-production.up.railway.app/users/${email}`,
+      {
+        method: "GET",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setIsAdmin(data);
-      })
-  },[email]);
- 
- 
- 
-
-  
+      });
+  }, [email]);
 
   const total = cartedProduct?.length;
 

@@ -64,6 +64,8 @@ const Login = () => {
           <div className="card w-96 bg-base-100 shadow-xl  lg:mx-0">
             <div className="card-body">
               <h2 className="text-center text-2xl   text-primary">Login</h2>
+              <h1>Admin Email : farhanfaruk696@gmail.com</h1>
+              <h1>Password : 123456</h1>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control w-full max-w-xs">
                   <label className="label">

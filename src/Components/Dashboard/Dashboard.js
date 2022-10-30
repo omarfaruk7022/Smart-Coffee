@@ -6,19 +6,20 @@ import auth from "../../firebase.init";
 
 const Dashboard = () => {
   const [user] = useAuthState(auth);
-  const [ isAdmin, setIsAdmin ] = useState();
+  const [isAdmin, setIsAdmin] = useState();
   const email = user?.email;
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${email}`, {
-      method: "GET",
-    })
+    fetch(
+      ` https://smart-coffee-server-production.up.railway.app/users/${email}`,
+      {
+        method: "GET",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setIsAdmin(data);
-      })
-  },[email]);
- 
-  
+      });
+  }, [email]);
 
   return (
     <div className="drawer drawer-mobile">
@@ -26,7 +27,7 @@ const Dashboard = () => {
       <div className="drawer-content ">
         <Outlet />
       </div>
-      {isAdmin?.data?.role === 'admin' && (
+      {isAdmin?.data?.role === "admin" && (
         <>
           <div className="drawer-side drop-shadow-2xl">
             <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
@@ -52,7 +53,7 @@ const Dashboard = () => {
                   className="block  h-15 leading-[3rem]  border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current "
                   to="/dashboard/allOrders"
                 >
-                 All Orders
+                  All Orders
                 </Link>
               </li>
             </ul>

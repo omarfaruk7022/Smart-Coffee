@@ -9,7 +9,7 @@ const AllOrders = () => {
     isLoading,
     refetch,
   } = useQuery("orders", () =>
-    fetch(`http://localhost:5000/cartList`, {
+    fetch(` https://smart-coffee-server-production.up.railway.app/cartList`, {
       method: "GET",
     })
       .then((res) => res.json())
@@ -34,13 +34,16 @@ const AllOrders = () => {
       status,
     };
     if (status) {
-      fetch(`http://localhost:5000/cartList/${id}`, {
-        method: "PATCH",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(inputData),
-      })
+      fetch(
+        ` https://smart-coffee-server-production.up.railway.app/cartList/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(inputData),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);

@@ -15,9 +15,12 @@ const ViewCart = ({ show, setShow }) => {
     isLoading,
     refetch,
   } = useQuery("cartedProduct", () =>
-    fetch(`http://localhost:5000/cartList/${email}`, {
-      method: "GET",
-    })
+    fetch(
+      ` https://smart-coffee-server-production.up.railway.app/cartList/${email}`,
+      {
+        method: "GET",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         return data;
@@ -34,9 +37,12 @@ const ViewCart = ({ show, setShow }) => {
   }
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/cartList/${id}`, {
-      method: "DELETE",
-    })
+    fetch(
+      ` https://smart-coffee-server-production.up.railway.app/cartList/${id}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -117,7 +123,7 @@ const ViewCart = ({ show, setShow }) => {
                                             </a>
                                           </h3>
                                           <p className="ml-4">
-                                           $ {product?.price}
+                                            $ {product?.price}
                                           </p>
                                         </div>
                                         <p className="mt-1 text-sm text-gray-500">
@@ -134,7 +140,6 @@ const ViewCart = ({ show, setShow }) => {
                                         </p>
                                       </div>
                                       <div className="flex flex-1 items-end justify-between text-sm">
-
                                         <p className="mt-1 text-sm text-green-400">
                                           {product?.status}
                                         </p>
