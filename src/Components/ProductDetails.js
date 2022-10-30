@@ -11,9 +11,7 @@ const ProductDetails = () => {
 
   const [product, setProduct] = useState();
   useEffect(() => {
-    fetch(
-      ` https://smart-coffee-server-production.up.railway.app/products/${id}`
-    )
+    fetch(`http://localhost:5000/products/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
@@ -33,6 +31,8 @@ const ProductDetails = () => {
     const name = product?.name;
     const price = packagePrice;
     const image = product?.image;
+    const address = e.target.address.value;
+    const phone = e.target.phone.value;
 
     const inputData = {
       flavour,
@@ -42,6 +42,8 @@ const ProductDetails = () => {
       price,
       email,
       image,
+      address,
+      phone,
     };
     if (person === "1 Person") {
       let personPrice = product?.price * 1 * quantity;
@@ -69,18 +71,17 @@ const ProductDetails = () => {
       name &&
       price !== undefined &&
       price > 0 &&
-      image
+      image && 
+      address
+      
     ) {
-      fetch(
-        ` https://smart-coffee-server-production.up.railway.app/addToCart`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(inputData),
-        }
-      )
+      fetch(`http://localhost:5000/addToCart`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(inputData),
+      })
         .then((res) => res.json())
         .then((data) => {
           swal("Good job!", "Product added !", "success");
@@ -417,6 +418,26 @@ const ProductDetails = () => {
                     </>
                   </div>
                 </fieldset>
+                <div className="my-5">
+                  <label>Delivery address</label>
+                  <input
+                    name="address"
+                    placeholder="Enter your address eg.House,Road,Area"
+                    type="text"
+                    id="address"
+                    class="w-full mt-2 rounded border-gray-200 py-3  text-sm [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+                  />
+                </div>
+                <div className="my-5">
+                  <label>Phone number </label>
+                  <input
+                    name="phone"
+                    placeholder="Enter your Phone number"
+                    type="number"
+                    id="phone"
+                    class="w-full mt-2 rounded border-gray-200 py-3  text-sm [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+                  />
+                </div>
               </form>
             </div>
           </div>

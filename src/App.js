@@ -16,6 +16,7 @@ import AllProducts from "./Components/AllProducts";
 import AddProduct from "./Components/Dashboard/AddProduct";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import DeleteProduct from "./Components/Dashboard/DeleteProduct";
+import AllOrders from "./Components/Dashboard/AllOrders";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         >
           <Route path="addProduct" element={<AddProduct></AddProduct>} />
           <Route path="deleteProduct" element={<DeleteProduct></DeleteProduct>} />
+          <Route path="allOrders" element={<AllOrders></AllOrders>} />
         </Route>
         <Route
           path="/productDetail/:id"

@@ -15,12 +15,9 @@ const ViewCart = ({ show, setShow }) => {
     isLoading,
     refetch,
   } = useQuery("cartedProduct", () =>
-    fetch(
-      ` https://smart-coffee-server-production.up.railway.app/cartList/${email}`,
-      {
-        method: "GET",
-      }
-    )
+    fetch(`http://localhost:5000/cartList/${email}`, {
+      method: "GET",
+    })
       .then((res) => res.json())
       .then((data) => {
         return data;
@@ -37,12 +34,9 @@ const ViewCart = ({ show, setShow }) => {
   }
 
   const handleDelete = (id) => {
-    fetch(
-      ` https://smart-coffee-server-production.up.railway.app/cartList/${id}`,
-      {
-        method: "DELETE",
-      }
-    )
+    fetch(`http://localhost:5000/cartList/${id}`, {
+      method: "DELETE",
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -78,7 +72,6 @@ const ViewCart = ({ show, setShow }) => {
                 >
                   <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
                     <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                      {/* {cartedProduct ? ( */}
                       <>
                         <div className="flex items-start justify-between">
                           <Dialog.Title className="text-lg font-medium text-gray-900">
@@ -124,16 +117,26 @@ const ViewCart = ({ show, setShow }) => {
                                             </a>
                                           </h3>
                                           <p className="ml-4">
-                                            {product?.price}
+                                           $ {product?.price}
                                           </p>
                                         </div>
                                         <p className="mt-1 text-sm text-gray-500">
                                           {product?.flavour}
                                         </p>
-                                      </div>
-                                      <div className="flex flex-1 items-end justify-between text-sm">
                                         <p className="text-gray-500">
                                           Qty {product?.quantity}
+                                        </p>
+                                        <p className="mt-1 text-sm text-gray-500">
+                                          {product?.phone}
+                                        </p>
+                                        <p className="mt-1 text-sm text-gray-500">
+                                          {product?.address}
+                                        </p>
+                                      </div>
+                                      <div className="flex flex-1 items-end justify-between text-sm">
+
+                                        <p className="mt-1 text-sm text-green-400">
+                                          {product?.status}
                                         </p>
 
                                         <div className="flex">
@@ -156,9 +159,6 @@ const ViewCart = ({ show, setShow }) => {
                           </div>
                         </div>
                       </>
-                      {/* ) : (
-                        <h1>Your cart is empty</h1>
-                      )} */}
 
                       <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                         <div className="flex justify-between text-base font-medium text-gray-900">

@@ -54,7 +54,7 @@ const Signup = () => {
       return;
     } else {
       await createUserWithEmailAndPassword(data.email, data.password);
-      fetch(" https://smart-coffee-server-production.up.railway.app/users", {
+      fetch("http://localhost:5000/users", {
         method: "POST",
         headers: {
           "content-type": "application/json",

@@ -10,6 +10,7 @@ import Loader from "./Loader";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
+  const [isAdmin, setIsAdmin] = useState();
   const [user] = useAuthState(auth);
   const email = user?.email;
   const handleSignOut = () => {
@@ -21,45 +22,28 @@ const Navbar = () => {
     isLoading,
     refetch,
   } = useQuery("cartedProduct", () =>
-    fetch(
-      ` https://smart-coffee-server-production.up.railway.app/cartList/${email}`,
-      {
-        method: "GET",
-      }
-    )
+    fetch(`http://localhost:5000/cartList/${email}`, {
+      method: "GET",
+    })
       .then((res) => res.json())
       .then((data) => {
         return data;
       })
   );
-  const { data: admin } = useQuery("admin", () =>
-    fetch(
-      ` https://smart-coffee-server-production.up.railway.app/users/${email}`,
-      {
-        method: "GET",
-      }
-    )
+  useEffect(() => {
+    fetch(`http://localhost:5000/users/${email}`, {
+      method: "GET",
+    })
       .then((res) => res.json())
       .then((data) => {
-        return data;
+        setIsAdmin(data);
       })
-  );
-  refetch();
-  console.log(admin);
-  if (isLoading) {
-    return <Loader />;
-  }
+  },[email]);
+ 
+ 
+ 
 
-  //  const { data: admin } = useQuery("admin", () =>
-  //   fetch(` https://smart-coffee-server-production.up.railway.app/users`, {
-  //     method: "GET",
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       refetch();
-  //       return data;
-  //     })
-  // );
+  
 
   const total = cartedProduct?.length;
 
@@ -103,7 +87,7 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                {admin?.data?.role === "admin" && (
+                {isAdmin?.data?.role === "admin" && (
                   <>
                     <Link
                       to="/dashboard"
@@ -143,7 +127,7 @@ const Navbar = () => {
                 Home
               </Link>
 
-              {admin?.data?.role === "admin" && (
+              {isAdmin?.data?.role === "admin" && (
                 <>
                   <Link
                     to="/dashboard"

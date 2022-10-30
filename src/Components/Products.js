@@ -6,7 +6,7 @@ const Products = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState();
   useEffect(() => {
-    fetch(" https://smart-coffee-server-production.up.railway.app/products")
+    fetch("http://localhost:5000/products")
       .then((res) => res.json())
       .then((json) => setProducts(json));
   }, []);

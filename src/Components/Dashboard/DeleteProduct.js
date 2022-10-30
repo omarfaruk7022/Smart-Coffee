@@ -10,7 +10,7 @@ const DeleteProduct = () => {
     isLoading,
     refetch,
   } = useQuery("products", () =>
-    fetch(` https://smart-coffee-server-production.up.railway.app/products`, {
+    fetch(`http://localhost:5000/products`, {
       method: "GET",
     })
       .then((res) => res.json())
@@ -28,12 +28,9 @@ const DeleteProduct = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        fetch(
-          ` https://smart-coffee-server-production.up.railway.app/products/${id}`,
-          {
-            method: "DELETE",
-          }
-        )
+        fetch(`http://localhost:5000/products/${id}`, {
+          method: "DELETE",
+        })
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
