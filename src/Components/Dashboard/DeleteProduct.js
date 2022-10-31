@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import Loader from "../Shared/Loader";
 
@@ -51,7 +50,7 @@ const DeleteProduct = () => {
     <div>
       <div class="overflow-x-auto relative shadow-md ">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
             <tr>
               <th scope="col" class="py-3 px-6">
                 No.
@@ -92,23 +91,47 @@ const DeleteProduct = () => {
                 )} */}
             </tr>
           </thead>
-          {products?.map((product,index) => (
+          {products?.map((product, index) => (
             <>
               <tbody>
-                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <td class="py-4 px-6">{index + 1}.</td>
+                <tr class="bg-white border-b  ">
+                  <td class="py-4 px-6">{index + 1}.</td>
                   <th
                     scope="row"
-                    class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
                   >
                     {product?.name}
                   </th>
                   <td class="py-4 px-6">{product?.price}</td>
 
                   <td class="py-4 px-6">{product?.stock}</td>
-                  <td class="py-4 px-6">{product?.flavor}</td>
-                  <td class="py-4 px-6">{product?.flavor2}</td>
-                  <td class="py-4 px-6">{product?.flavor3}</td>
+                  <td>
+                    {product?.flavor  ? (
+                      <>
+                        <td class="py-4 px-6">{product?.flavor}</td>
+                      </>
+                    ) : (
+                      <h1 className="ml-8 ">N/A</h1>
+                    )}
+                  </td>
+                  <td>
+                    {product?.flavor2  ? (
+                      <>
+                        <td class="py-4 px-6">{product?.flavor2}</td>
+                      </>
+                    ) : (
+                      <h1 className="ml-8">N/A</h1>
+                    )}
+                  </td>
+                  <td>
+                    {product?.flavor3 ? (
+                      <>
+                        <td class="py-4 px-6">{product?.flavor3}</td>
+                      </>
+                    ) : (
+                      <h1 className="ml-8">N/A</h1>
+                    )}
+                  </td>
 
                   {/* {admin?.data?.role === "admin" && (
                       <> */}
@@ -117,7 +140,7 @@ const DeleteProduct = () => {
                     <button
                       onClick={() => handleDelete(product._id)}
                       type="button"
-                      class="btn btn-outline bg-red-500"
+                      class="btn btn-xs  bg-red-500"
                     >
                       Delete
                     </button>
