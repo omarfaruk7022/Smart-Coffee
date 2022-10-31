@@ -8,7 +8,6 @@ import ViewCart from "../ViewCart";
 import { useQuery } from "react-query";
 import useAdmin from "./Hooks/useAdmin";
 
-
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const [isAdmin, setIsAdmin] = useState();
@@ -22,7 +21,7 @@ const Navbar = () => {
 
   const {
     data: cartedProduct,
-    isLoading,
+
     refetch,
   } = useQuery("cartedProduct", () =>
     fetch(
@@ -55,8 +54,6 @@ const Navbar = () => {
   const showComponent = () => {
     setShow(true);
   };
-  
- 
 
   return (
     <div className="max-h-screen">
@@ -96,13 +93,13 @@ const Navbar = () => {
 
                 {user && admin && (
                   <>
-                  <li>
-                    <Link
-                      to="/dashboard"
-                      class="block  h-12 leading-[3rem] border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current text-[12px] "
-                    >
-                      Dashboard
-                    </Link>
+                    <li>
+                      <Link
+                        to="/dashboard"
+                        class="block  h-12 leading-[3rem] border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current text-[12px] "
+                      >
+                        Dashboard
+                      </Link>
                     </li>
                   </>
                 )}
@@ -136,7 +133,7 @@ const Navbar = () => {
                 Home
               </Link>
 
-              { user && admin  && (
+              {user && admin && (
                 <>
                   <Link
                     to="/dashboard"
@@ -209,7 +206,7 @@ const Navbar = () => {
             <>
               <div className="avatar online mt-1 lg:block hidden">
                 <div className="w-12 rounded-full">
-                  <img src={user?.photoURL} />
+                  <img alt="" src={user?.photoURL} />
                 </div>
               </div>
             </>
@@ -219,7 +216,7 @@ const Navbar = () => {
             <>
               <div className="avatar online lg:block hidden">
                 <div className="w-12 rounded-full ">
-                  <img src="https://placeimg.com/192/192/people" />
+                  <img alt="" src="https://placeimg.com/192/192/people" />
                 </div>
               </div>
             </>

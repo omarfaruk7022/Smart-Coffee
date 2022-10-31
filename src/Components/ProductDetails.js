@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import swal from "sweetalert";
-import image1 from "../../src//Images///coffee-2676642_960_720.jpg";
 import auth from "../firebase.init";
-import ViewCart from "./ViewCart";
 
 const ProductDetails = () => {
   const { id } = useParams();

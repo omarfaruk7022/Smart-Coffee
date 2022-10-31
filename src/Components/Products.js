@@ -90,26 +90,7 @@ const Products = () => {
               See more
             </span>
           </button>
-          {/* <button
-          className="px- flex ml-auto mt-10 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-green-500 duration-300  bg-amber-900 text-white font-bold py-3 px-4 rounded-full"
-          onClick={() => navigate(`/allProducts`)}
-        >
-          See more 
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6 ml-2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-            />
-          </svg>
-        </button> */}
+          
         </div>
       </section>
     </div>
