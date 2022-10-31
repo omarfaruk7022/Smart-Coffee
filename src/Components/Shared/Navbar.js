@@ -6,30 +6,20 @@ import auth from "../../firebase.init";
 import img from "../../../src//Images//logo-white.svg";
 import ViewCart from "../ViewCart";
 import { useQuery } from "react-query";
+import useAdmin from "./Hooks/useAdmin";
 
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState();
   const [user] = useAuthState(auth);
   const email = user?.email;
   const handleSignOut = () => {
     signOut(auth);
   };
-  //   const [isEmail, setIsEmail] = useState();
-  //   useEffect(() => {
-  //     fetch(` https://smart-coffee-server-production.up.railway.app/users`, {
-  //       method: "GET",
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         setIsEmail(data);
-  //       });
-  //   }, []);
-  // if(isEmail?.email === email ){
-  //   console.log();
 
-  // }
+  const [admin] = useAdmin(user);
+
   const {
     data: cartedProduct,
     isLoading,
@@ -46,6 +36,7 @@ const Navbar = () => {
         return data;
       })
   );
+  refetch();
   useEffect(() => {
     fetch(
       ` https://smart-coffee-server-production.up.railway.app/users/${email}`,
@@ -64,6 +55,8 @@ const Navbar = () => {
   const showComponent = () => {
     setShow(true);
   };
+  
+ 
 
   return (
     <div className="max-h-screen">
@@ -101,7 +94,7 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                {isAdmin?.data?.role === "admin" && (
+                {user && admin && (
                   <>
                   <li>
                     <Link
@@ -143,7 +136,7 @@ const Navbar = () => {
                 Home
               </Link>
 
-              {isAdmin?.data?.role === "admin" && (
+              { user && admin  && (
                 <>
                   <Link
                     to="/dashboard"
@@ -198,14 +191,14 @@ const Navbar = () => {
           </>
         )}
         <div className="lg:mr-28">
-          {user?.displayName && (
+          {isAdmin?.data?.name && (
             <>
-              <p className="text-[11px] lg:mt-3.5  mr-2  lg:block hidden">
-                {user?.displayName}
+              <p className="text-[11px] lg:mt-3  mr-2  lg:block hidden">
+                {isAdmin?.data?.name}
               </p>
             </>
           )}
-          {user && !user?.displayName && (
+          {user && !isAdmin?.data?.name && (
             <>
               <h1 className="text-[11px]  mr-2 lg:block hidden">
                 Unknown user

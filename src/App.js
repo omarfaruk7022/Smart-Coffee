@@ -17,6 +17,8 @@ import AddProduct from "./Components/Dashboard/AddProduct";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import DeleteProduct from "./Components/Dashboard/DeleteProduct";
 import AllOrders from "./Components/Dashboard/AllOrders";
+import Users from "./Components/Users";
+import RequireAdmin from "./Components/RequireAdmin";
 
 function App() {
   return (
@@ -37,9 +39,38 @@ function App() {
             </RequireAuth>
           }
         >
-          <Route path="addProduct" element={<AddProduct></AddProduct>} />
-          <Route path="deleteProduct" element={<DeleteProduct></DeleteProduct>} />
-          <Route path="allOrders" element={<AllOrders></AllOrders>} />
+          <Route
+            index
+            element={
+              <RequireAdmin>
+                <AddProduct></AddProduct>
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="deleteProduct"
+            element={
+              <RequireAdmin>
+                <DeleteProduct></DeleteProduct>
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="allOrders"
+            element={
+              <RequireAdmin>
+                <AllOrders></AllOrders>
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="users"
+            element={
+              <RequireAdmin>
+                <Users></Users>
+              </RequireAdmin>
+            }
+          />
         </Route>
         <Route
           path="/productDetail/:id"

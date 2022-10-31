@@ -11,8 +11,7 @@ import { useEffect } from "react";
 import Loader from "./Shared/Loader";
 
 const Login = () => {
-  const [signInWithGoogle, googleUser, googleLoading, googleError] =
-    useSignInWithGoogle(auth);
+  
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
   const navigate = useNavigate();
@@ -27,22 +26,22 @@ const Login = () => {
     handleSubmit,
   } = useForm();
   useEffect(() => {
-    if (user || googleUser) {
+    if (user ) {
       navigate(from, { replace: true });
     }
-  }, [user, googleUser, from, navigate]);
-  if (googleLoading || loading) {
+  }, [user,  from, navigate]);
+  if ( loading) {
     return <Loader></Loader>;
   }
-  if (loading || googleLoading) {
+  if (loading ) {
     return <Loader />;
   }
-  if (user || googleUser) {
+  if (user ) {
     // Router.push('/');
 
     swal("Yayy", "Login Successfully Completed", "success");
   }
-  if (error || googleError) {
+  if (error ) {
     swal("Something Wrong", "Login Failed", "error");
   }
 
@@ -64,8 +63,7 @@ const Login = () => {
           <div className="card w-96 bg-base-100 shadow-xl  lg:mx-0">
             <div className="card-body">
               <h2 className="text-center text-2xl   text-primary">Login</h2>
-              <h1>Admin Email : farhanfaruk696@gmail.com</h1>
-              <h1>Password : 123456</h1>
+             
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control w-full max-w-xs">
                   <label className="label">
@@ -135,11 +133,12 @@ const Login = () => {
                 {signInError}
 
                 <input
-                  className="btn btn-outline w-full max-w-xs hover:bg-primary border-primary hover:border-primary"
+                  className="btn btn-outline w-full max-w-xs hover:bg-primary bg-amber-900 border-amber-900 text-white hover:border-primary"
                   type="submit"
                   value="Login"
                 />
               </form>
+              <div className="divider">OR</div>
               <div className="flex">
                 <p>
                   {" "}
@@ -153,13 +152,7 @@ const Login = () => {
                   </small>
                 </p>
               </div>
-              <div className="divider">OR</div>
-              <button
-                onClick={() => signInWithGoogle()}
-                className="btn btn-outline"
-              >
-                Continue With Google
-              </button>
+             
             </div>
           </div>
         </div>

@@ -5,17 +5,17 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import auth from "../firebase.init";
 import Loader from "./Shared/Loader";
 
 const Signup = () => {
-  const [signInWithGoogle, googleUser, googleLoading, googleError] =
-    useSignInWithGoogle(auth);
+  // const [signInWithGoogle, googleUser, googleLoading, googleError] =
+  //   useSignInWithGoogle(auth);
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
-  console.log(googleUser?.user?.displayName);
+
   const navigate = useNavigate();
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
@@ -28,11 +28,11 @@ const Signup = () => {
     handleSubmit,
   } = useForm();
   useEffect(() => {
-    if (user || googleUser) {
+    if (user) {
       navigate(from, { replace: true });
     }
-  }, [user, googleUser, from, navigate]);
-  if (loading || googleLoading) {
+  }, [user, from, navigate]);
+  if (loading) {
     return <Loader />;
   }
   const onSubmit = async (data) => {
@@ -49,7 +49,7 @@ const Signup = () => {
       name,
     };
 
-    if (error || googleError) {
+    if (error) {
       swal("Error", error.message, "error");
       return;
     } else {
@@ -69,10 +69,10 @@ const Signup = () => {
   };
   return (
     <div>
-      <h1 className="text-6xl text-center underline">Welcome</h1>
-      <div className="lg:flex justify-center items-center h-screen ">
+      
+      <div className="lg:flex justify-center items-center h-screen">
         <form className="" onSubmit={handleSubmit(onSubmit)}>
-          <div class="relative z-0 mb-6 w-full group">
+          <div class="relative z-0 mb-6 w-full group ">
             <input
               {...register("email", {
                 required: {
@@ -86,7 +86,7 @@ const Signup = () => {
               })}
               type="email"
               id="floating_email"
-              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer"
+              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer"
               placeholder=" "
               required=""
             />
@@ -111,13 +111,13 @@ const Signup = () => {
                 },
               })}
               id="floating_password"
-              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-primary peer"
+              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer"
               placeholder=" "
               required=""
             />
             <label
               for="floating_password"
-              class="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-16 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-primary "
+              class="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-16 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6  "
             >
               Password
             </label>
@@ -134,7 +134,7 @@ const Signup = () => {
                   },
                 })}
                 id="floating_first_name"
-                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer"
                 placeholder=" "
                 required=""
               />
@@ -155,7 +155,7 @@ const Signup = () => {
                   },
                 })}
                 id="floating_last_name"
-                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-primary peer"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer"
                 placeholder=" "
                 required=""
               />
@@ -169,16 +169,23 @@ const Signup = () => {
           </div>
           {signInError}
           <div class="grid md:grid-cols-2 md:gap-6"></div>
-          <button type="submit" class="btn btn-outline btn-success">
+          <button type="submit" class="btn btn-outline max-w-xs hover:bg-primary bg-amber-900 border-amber-900 text-white hover:border-primary w-full">
             Sign up
           </button>
           <div className="divider">OR</div>
-          <button
-            onClick={() => signInWithGoogle()}
-            className="btn btn-outline w-full"
-          >
-            Continue With Google
-          </button>
+          <div className="flex">
+            <p>
+              {" "}
+              <small>
+                Do you have an account !{" "}
+                <Link className="text-primary link" to="/login">
+                  <span className="underline cursor-pointer text-blue-500">
+                    Please login
+                  </span>
+                </Link>
+              </small>
+            </p>
+          </div>
         </form>
       </div>
     </div>

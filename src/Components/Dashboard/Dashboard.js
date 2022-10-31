@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useQuery } from "react-query";
 import { Link, Outlet } from "react-router-dom";
 import auth from "../../firebase.init";
+import useAdmin from "../Shared/Hooks/useAdmin";
 
 const Dashboard = () => {
   const [user] = useAuthState(auth);
   const [isAdmin, setIsAdmin] = useState();
-  const email = user?.email;
-  useEffect(() => {
-    fetch(
-      ` https://smart-coffee-server-production.up.railway.app/users/${email}`,
-      {
-        method: "GET",
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setIsAdmin(data);
-      });
-  }, [email]);
+  
+  const [admin] = useAdmin(user);
+  // useEffect(() => {
+  //   fetch(
+  //     ` https://smart-coffee-server-production.up.railway.app/users/${email}`,
+  //     {
+  //       method: "GET",
+  //     }
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setIsAdmin(data);
+  //     });
+  // }, [email]);
 
   return (
     <div className="drawer drawer-mobile">
@@ -27,7 +28,7 @@ const Dashboard = () => {
       <div className="drawer-content ">
         <Outlet />
       </div>
-      {isAdmin?.data?.role === "admin" && (
+      {user && admin && (
         <>
           <div className="drawer-side drop-shadow-2xl">
             <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
@@ -35,7 +36,7 @@ const Dashboard = () => {
               <li>
                 <Link
                   className="block  h-15 leading-[3rem]  border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current "
-                  to="/dashboard/addProduct"
+                  to="/dashboard"
                 >
                   Add Product
                 </Link>
@@ -56,6 +57,16 @@ const Dashboard = () => {
                   All Orders
                 </Link>
               </li>
+              <li>
+                <Link
+                  className="block  h-15 leading-[3rem]  border-b-4 border-transparent hover:hover:text-amber-900 hover:border-current "
+                  to="/dashboard/users"
+                >
+                  All Users
+                </Link>
+              </li>
+              
+
             </ul>
           </div>
         </>
