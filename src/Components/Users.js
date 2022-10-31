@@ -10,7 +10,7 @@ const Users = () => {
     isLoading,
     refetch,
   } = useQuery("users", () =>
-    fetch("http://localhost:5000/users", {
+    fetch(" https://smart-coffee-server-production.up.railway.app/users", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -36,8 +36,13 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            {users?.map((user,index) => (
-              <UserRow key={user._id} user={user} index={index}  refetch={refetch}></UserRow>
+            {users?.map((user, index) => (
+              <UserRow
+                key={user._id}
+                user={user}
+                index={index}
+                refetch={refetch}
+              ></UserRow>
             ))}
           </tbody>
         </table>

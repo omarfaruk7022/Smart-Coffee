@@ -14,10 +14,13 @@ const UserRow = ({ user, refetch, index }) => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        fetch(`http://localhost:5000/users/admin/${email}`, {
-          method: "PUT",
-          headers: {},
-        })
+        fetch(
+          ` https://smart-coffee-server-production.up.railway.app/users/admin/${email}`,
+          {
+            method: "PUT",
+            headers: {},
+          }
+        )
           .then((res) => {
             if (res.status === 403) {
               swal("You are not authorized to make admin");
@@ -43,10 +46,13 @@ const UserRow = ({ user, refetch, index }) => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        fetch(`http://localhost:5000/users/admin/${email}`, {
-          method: "PATCH",
-          headers: {},
-        })
+        fetch(
+          ` https://smart-coffee-server-production.up.railway.app/users/admin/${email}`,
+          {
+            method: "PATCH",
+            headers: {},
+          }
+        )
           .then((res) => {
             if (res.status === 403) {
               swal("You are not authorized to make admin");
@@ -85,9 +91,7 @@ const UserRow = ({ user, refetch, index }) => {
           </>
         ) : (
           <>
-            <button  className="btn btn-xs disabled">
-              Remove Admin
-            </button>
+            <button className="btn btn-xs disabled">Remove Admin</button>
           </>
         )}
       </td>
