@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import swal from "sweetalert";
 import auth from "../firebase.init";
 
@@ -398,23 +398,36 @@ const ProductDetails = () => {
                     </div>
 
                     <>
-                      {!packagePrice ? (
+                      {product?.stock === "Out off stock" ? (
                         <>
                           <button
-                            type="submit"
-                            class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
+                            
+                            class="ml-3 block rounded bg-gray-300 px-5 py-3 text-xs font-medium disabled text-white cursor-not-allowed"
                           >
-                            See Cost
+                            Out of stock
                           </button>
                         </>
                       ) : (
                         <>
-                          <button
-                            type="submit"
-                            class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
-                          >
-                            Add to Cart
-                          </button>
+                          {!packagePrice ? (
+                            <>
+                              <button
+                                type="submit"
+                                class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
+                              >
+                                See Cost
+                              </button>
+                            </>
+                          ) : (
+                            <>
+                              <button
+                                type="submit"
+                                class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
+                              >
+                                Add to Cart
+                              </button>
+                            </>
+                          )}
                         </>
                       )}
                     </>
