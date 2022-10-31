@@ -54,6 +54,9 @@ const DeleteProduct = () => {
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" class="py-3 px-6">
+                No.
+              </th>
+              <th scope="col" class="py-3 px-6">
                 Product name
               </th>
 
@@ -89,10 +92,11 @@ const DeleteProduct = () => {
                 )} */}
             </tr>
           </thead>
-          {products?.map((product) => (
+          {products?.map((product,index) => (
             <>
               <tbody>
                 <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                <td class="py-4 px-6">{index + 1}.</td>
                   <th
                     scope="row"
                     class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"

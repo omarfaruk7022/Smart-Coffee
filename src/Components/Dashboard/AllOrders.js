@@ -21,14 +21,7 @@ const AllOrders = () => {
   const handleStatus = (e, id) => {
     e.preventDefault();
     const status = e.target.status?.value;
-    // const flavour = orders?.flavour;
-    // const packages = orders?.packages;
-    // const  price = orders?.price;
-    // const quantity = orders?.quantity;
-    // const email = orders?.email;
-    // const name = orders?.name;
-    // const address = orders?.address;
-    // const phone = orders?.phone;
+   
 
     const inputData = {
       status,
@@ -91,23 +84,14 @@ const AllOrders = () => {
               <th scope="col" class="py-3 px-6">
                 Action
               </th>
-              {/* {admin?.data?.role === "admin" && (
-                    <>
-                      <th scope="col" class="py-3 px-6">
-                        Edit
-                      </th>
-                      <th scope="col" class="py-3 px-6">
-                        Delete
-                      </th>
-                    </>
-                  )} */}
+            
             </tr>
           </thead>
           {orders?.map((order,index) => (
             <>
               <tbody>
                 <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <td class="py-4 px-6">{index + 1}</td>
+                <td class="py-4 px-6">{index + 1}.</td>
                   <th
                     scope="row"
                     class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
