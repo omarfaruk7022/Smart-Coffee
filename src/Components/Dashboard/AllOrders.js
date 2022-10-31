@@ -48,7 +48,7 @@ const AllOrders = () => {
 
   return (
     <div>
-      <div class="overflow-x-auto relative shadow-md ">
+      <div class="overflow-x-auto relative shadow-md  ">
         <table class="w-full text-sm text-left text-gray-500">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
             <tr>
@@ -91,7 +91,7 @@ const AllOrders = () => {
           {orders?.map((order,index) => (
             <>
               <tbody>
-                <tr class="bg-white border-b  ">
+                <tr class="bg-white border-b ">
                 <td class="py-4 px-6">{index + 1}.</td>
                   <th
                     scope="row"

@@ -133,8 +133,7 @@ const DeleteProduct = () => {
                     )}
                   </td>
 
-                  {/* {admin?.data?.role === "admin" && (
-                      <> */}
+                  
 
                   <td class="py-4 px-6">
                     <button
@@ -146,7 +145,6 @@ const DeleteProduct = () => {
                     </button>
                   </td>
 
-                  {/* )} */}
                 </tr>
               </tbody>
             </>
