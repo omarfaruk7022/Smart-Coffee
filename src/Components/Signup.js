@@ -61,7 +61,9 @@ const Signup = () => {
         body: JSON.stringify(userSignupData),
       })
         .then((res) => res.json())
-        .then((data) => {});
+        .then((data) => {
+          console.log(data);
+        });
 
       swal("Yayy", "Sign Up  Successfully Completed ", "success");
     }
