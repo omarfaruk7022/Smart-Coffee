@@ -138,6 +138,9 @@ const ViewCart = ({ show, setShow }) => {
                                         <p className="mt-1 text-sm text-gray-500">
                                           {product?.address}
                                         </p>
+                                        <p className="mt-1 text-sm text-gray-500">
+                                          {product?.taskTime} {product?.taskDate}
+                                        </p>
                                       </div>
                                       <div className="flex flex-1 items-end justify-between text-sm">
                                         <p className="mt-1 text-sm text-green-400">

@@ -76,6 +76,9 @@ const AllOrders = () => {
                 Address
               </th>
               <th scope="col" class="py-3 px-6">
+                Time And Date
+              </th>
+              <th scope="col" class="py-3 px-6">
                 Quantity
               </th>
 
@@ -106,6 +109,7 @@ const AllOrders = () => {
                   <td class="py-4 px-6">{order?.packages}</td>
                   <td class="py-4 px-6">{order?.phone}</td>
                   <td class="py-4 px-6">{order?.address}</td>
+                  <td class="py-4 px-6">{order?.taskTime} {order?.taskDate}</td>
                   <td class="py-4 px-6">{order?.quantity}</td>
                   <td class="py-4 px-6">{order?.status}</td>
                   <td class="py-4 px-6">

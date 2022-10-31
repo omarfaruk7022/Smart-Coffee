@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useParams } from "react-router-dom";
@@ -8,6 +9,10 @@ const ProductDetails = () => {
   const { id } = useParams();
 
   const [product, setProduct] = useState();
+  const date = new Date();
+  const formattedDate = format(date, "PP");
+  const formattedDate2 = format(date, "p");
+ 
   useEffect(() => {
     fetch(
       ` https://smart-coffee-server-production.up.railway.app/products/${id}`
@@ -33,7 +38,8 @@ const ProductDetails = () => {
     const image = product?.image;
     const address = e.target.address.value;
     const phone = e.target.phone.value;
-
+    const taskDate = formattedDate;
+    const taskTime = formattedDate2;
     const inputData = {
       flavour,
       quantity,
@@ -44,7 +50,10 @@ const ProductDetails = () => {
       image,
       address,
       phone,
+      taskDate,
+      taskTime,
     };
+    console.log(taskDate, taskTime);
     if (person === "1 Person") {
       let personPrice = product?.price * 1 * quantity;
       setPackagePrice(Number(personPrice));
@@ -400,10 +409,7 @@ const ProductDetails = () => {
                     <>
                       {product?.stock === "Out off stock" ? (
                         <>
-                          <button
-                            
-                            class="ml-3 block rounded bg-gray-300 px-5 py-3 text-xs font-medium disabled text-white cursor-not-allowed"
-                          >
+                          <button class="ml-3 block rounded bg-gray-300 px-5 py-3 text-xs font-medium disabled text-white cursor-not-allowed">
                             Out of stock
                           </button>
                         </>
