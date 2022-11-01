@@ -1,12 +1,10 @@
-import React, { useEffect} from "react";
-import {
-  useCreateUserWithEmailAndPassword,
- 
-} from "react-firebase-hooks/auth";
+import React, { useEffect } from "react";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import auth from "../firebase.init";
+import usePutMethod from "./Shared/Hooks/usePutMethod";
 import Loader from "./Shared/Loader";
 
 const Signup = () => {
@@ -17,6 +15,8 @@ const Signup = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const [putMethod] = usePutMethod(user);
+
   let from = location.state?.from?.pathname || "/";
 
   let signInError;
@@ -26,18 +26,20 @@ const Signup = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  useEffect(() => {
-    if (user) {
-      navigate(from, { replace: true });
-    }
-  }, [user, from, navigate]);
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate(from, { replace: true });
+  //   }
+  // }, [user, from, navigate]);
   if (loading) {
     return <Loader />;
+  }
+  if (putMethod) {
+    navigate("/", { replace: true });
   }
   const onSubmit = async (data) => {
     const email = data.email;
     const password = data.password;
-
     const firstName = data.first_name;
     const lastName = data.last_name;
     const name = firstName + " " + lastName;
@@ -53,13 +55,16 @@ const Signup = () => {
       return;
     } else {
       await createUserWithEmailAndPassword(data.email, data.password);
-      fetch(" https://smart-coffee-server-production.up.railway.app/users", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(userSignupData),
-      })
+      fetch(
+        `  https://smart-coffee-server-production.up.railway.app/usersData/${email}`,
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(userSignupData),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
@@ -70,7 +75,6 @@ const Signup = () => {
   };
   return (
     <div>
-      
       <div className="lg:flex justify-center items-center h-screen">
         <form className="" onSubmit={handleSubmit(onSubmit)}>
           <div class="relative z-0 mb-6 w-full group ">
@@ -170,7 +174,10 @@ const Signup = () => {
           </div>
           {signInError}
           <div class="grid md:grid-cols-2 md:gap-6"></div>
-          <button type="submit" class="btn btn-outline max-w-xs hover:bg-primary bg-amber-900 border-amber-900 text-white hover:border-primary w-full">
+          <button
+            type="submit"
+            class="btn btn-outline max-w-xs hover:bg-primary bg-amber-900 border-amber-900 text-white hover:border-primary w-full"
+          >
             Sign up
           </button>
           <div className="divider">OR</div>

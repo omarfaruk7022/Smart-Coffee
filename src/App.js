@@ -19,6 +19,7 @@ import DeleteProduct from "./Components/Dashboard/DeleteProduct";
 import AllOrders from "./Components/Dashboard/AllOrders";
 import Users from "./Components/Users";
 import RequireAdmin from "./Components/RequireAdmin";
+import UsersData from "./Components/Dashboard/UsersData";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
               </RequireAdmin>
             }
           />
+
           <Route
             path="deleteProduct"
             element={
@@ -63,6 +65,15 @@ function App() {
               </RequireAdmin>
             }
           />
+          <Route
+            path="usersData"
+            element={
+              <RequireAdmin>
+                <UsersData></UsersData>
+              </RequireAdmin>
+            }
+          />
+
           <Route
             path="users"
             element={

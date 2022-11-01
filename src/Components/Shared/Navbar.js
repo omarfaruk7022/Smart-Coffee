@@ -38,7 +38,7 @@ const Navbar = () => {
   refetch();
   useEffect(() => {
     fetch(
-      ` https://smart-coffee-server-production.up.railway.app/users/${email}`,
+      `  https://smart-coffee-server-production.up.railway.app/usersData/${email}`,
       {
         method: "GET",
       }

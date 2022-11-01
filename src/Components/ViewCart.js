@@ -81,7 +81,7 @@ const ViewCart = ({ show, setShow }) => {
                       <>
                         <div className="flex items-start justify-between">
                           <Dialog.Title className="text-lg font-medium text-gray-900">
-                            <span className="ml-5 ">Your cart</span>
+                            <span className="ml-5 ">Your order list</span>
                           </Dialog.Title>
                           <div className="ml-3 flex h-7 items-center">
                             <button

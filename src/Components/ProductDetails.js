@@ -430,7 +430,7 @@ const ProductDetails = () => {
                                 type="submit"
                                 class="ml-3 block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
                               >
-                                Add to Cart
+                                Place order
                               </button>
                             </>
                           )}

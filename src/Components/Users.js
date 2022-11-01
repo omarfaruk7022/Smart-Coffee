@@ -10,7 +10,7 @@ const Users = () => {
     isLoading,
     refetch,
   } = useQuery("users", () =>
-    fetch(" https://smart-coffee-server-production.up.railway.app/users", {
+    fetch("  https://smart-coffee-server-production.up.railway.app/users", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -18,25 +18,34 @@ const Users = () => {
     }).then((res) => res.json())
   );
   refetch();
+  // const {
+  //   data: usersData,
+
+  // } = useQuery("usersData", () =>
+  //   fetch("  https://smart-coffee-server-production.up.railway.app/usersData", {
+  //     method: "GET",
+  //     headers: {
+  //       authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+  //     },
+  //   }).then((res) => res.json())
+  // );
   if (isLoading) {
     return <Loader />;
   }
   return (
     <div>
-      <h2 className="text-2xl">All Users {users.length}</h2>
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
             <tr>
               <th>No.</th>
-              <th>Name</th>
               <th>Email</th>
               <th>Is Admin </th>
               <th>Delete</th>
             </tr>
           </thead>
           <tbody>
-            {users?.map((user, index) => (
+            {users.map((user, index) => (
               <UserRow
                 key={user._id}
                 user={user}

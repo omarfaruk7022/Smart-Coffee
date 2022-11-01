@@ -70,7 +70,6 @@ const UserRow = ({ user, refetch, index }) => {
   return (
     <tr>
       <th>{index + 1}.</th>
-      <td>{name}</td>
       <td>{email}</td>
       <td>
         {role !== "admin" ? (
